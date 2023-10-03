@@ -25,7 +25,7 @@ function Home() {
   return (
     <>
       <Typography variant="h2" fontWeight="bold">
-        Quiz App
+        Trivia Mania
       </Typography>
       <Settings />
     </>
@@ -33,4 +33,3 @@ function Home() {
 }
 
 export default App;
-
