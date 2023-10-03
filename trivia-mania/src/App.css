@@ -1,0 +1,79 @@
+
+:root {
+  --gradient: linear-gradient(60deg, #141b2d, #6870fa, #141b2d);
+  --myGrey: #666666;
+  --myBlue: #6870fa;
+  --myDarkBlue: #141b2d;
+  --myGreen: #4cceac;
+  --myRed: #db4f4a;
+
+  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+}
+
+.App {
+  text-align: center;
+}
+
+.quiz-container {
+  margin: auto;
+  margin-top: 5%;
+  padding: 15px;
+  width: 65vw;
+  background: var(--gradient);
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+}
+
+.quiz-options {
+  margin: 0 auto;
+  max-width: 90%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+.quiz-option-container {
+  width: 40%;
+  /* height: 10vh; */
+  font-family: var(--font-mono);
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+  margin: 3%;
+  background-color: var(--myDarkBlue);
+  color: white;
+}
+.question {
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+  margin: 1%;
+  padding: 5px;
+  color: var(--myDarkBlue);
+  background-color: white;
+}
+
+.quiz-nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+.quiz-nav button, .results-container button{
+  font-family: var(--font-mono);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+  margin: 5px;
+  font-size: large;
+}
+
+.result-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  margin-bottom: 15px;
+  background-color: var(--myDarkBlue);
+  border-radius: 50%;
+  font-size: x-large;
+}
