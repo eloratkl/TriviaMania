@@ -1,64 +1,43 @@
-import React, { useState, useTransition } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setLeaderboardPeriod } from '../redux/actions/leaderboardActions';
-import Profiles from '../userProfiles/Profiles';
-import { withAuthUser } from 'react-auth-kit'; // Import withAuthUser from react-auth-kit
+import React, { useState } from "react";
+import {
+  Container,
+  Typography,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+} from "@mui/material";
+import { Box } from "@mui/system";
+import Board from "../components/Board";
+import "../components/style.css";
 
-function Leaderboard({ authState }) {
-  const [period, setPeriod] = useState(0);
-  const dispatch = useDispatch();
-  const leaderboardPeriod = useSelector((state) => state.leaderboard.period);
-  const [startTransition, isPending] = useTransition();
+const LeaderboardPage = () => {
+  const [period, setPeriod] = useState("all");
 
-  const handleClick = (e) => {
-    const selectedPeriod = parseInt(e.target.dataset.id);
-    setPeriod(selectedPeriod);
-
-    // Use startTransition to perform asynchronous tasks
-    startTransition(() => {
-      dispatch(setLeaderboardPeriod(selectedPeriod));
-    });
+  const handlePeriodChange = (event) => {
+    setPeriod(event.target.value);
   };
 
   return (
-    <div className="board">
-      <h1 className="leaderboard">Leaderboard</h1>
-
-      <div className="duration">
-        {authState && ( // Render buttons only if the user is authenticated
-          <>
-            <button
-              onClick={handleClick}
-              data-id="7"
-              className={period === 7 ? 'active' : ''}
-            >
-              7 Days
-            </button>
-            <button
-              onClick={handleClick}
-              data-id="30"
-              className={period === 30 ? 'active' : ''}
-            >
-              30 Days
-            </button>
-          </>
-        )}
-        <button
-          onClick={handleClick}
-          data-id="0"
-          className={period === 0 ? 'active' : ''}
+    <Container maxWidth="md"> {/* Use Container for styling */}
+      <Box>
+        <Typography variant="h2" fontWeight="bold">
+          Trivia Mania
+        </Typography>
+        <RadioGroup
+          name="period"
+          value={period}
+          onChange={handlePeriodChange}
+          row
+          className="radio-group-center"
         >
-          All-Time
-        </button>
-      </div>
-
-      {isPending ? (
-        <p>Loading...</p>
-      ) : (
-        <Profiles period={leaderboardPeriod} />
-      )}
-    </div>
+          <FormControlLabel value="7" control={<Radio />} label="7 Days" />
+          <FormControlLabel value="30" control={<Radio />} label="30 Days" />
+          <FormControlLabel value="all" control={<Radio />} label="All-Time" />
+        </RadioGroup>
+        <Board period={period} /> {/* Pass the selected period as a prop */}
+      </Box>
+    </Container>
   );
-}
+};
 
-export default withAuthUser(Leaderboard);
+export default LeaderboardPage;
