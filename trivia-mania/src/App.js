@@ -2,8 +2,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Settings from "./pages/Settings";
 import Questions from "./pages/Questions";
 import FinalScreen from "./pages/FinalScreen";
+import Leaderboard from "./pages/Leaderboard";
 import { Container, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/questions" element={<Questions />} />
             <Route path="/score" element={<FinalScreen />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
           </Routes>
         </Box>
       </Container>
@@ -28,6 +31,7 @@ function Home() {
         Trivia Mania
       </Typography>
       <Settings />
+      {/* <Board /> */}
     </>
   );
 }
