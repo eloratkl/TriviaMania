@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate hook from 
 import { handleAmountChange, handleScoreChange } from "../redux/actions/quizActions"; // Import action creators
 
 const FinalScreen = () => {
-  const disptach = useDispatch(); // Initialize useDispatch hook to dispatch actions
+  const dispatch = useDispatch(); // Initialize useDispatch hook to dispatch actions
   const navigate = useNavigate(); // Initialize useNavigate hook to handle navigation
   const { score } = useSelector((state) => state); // Select the 'score' state from Redux store
 
   const handleBackToSettings = () => {
-    disptach(handleScoreChange(0)); // Dispatch action to reset the score to 0
-    disptach(handleAmountChange(50)); // Dispatch action to reset the amount to 50
+    dispatch(handleScoreChange(0)); // Dispatch action to reset the score to 0
+    dispatch(handleAmountChange(50)); // Dispatch action to reset the amount to 50
     navigate("/"); // Use navigate to go back to the home route ("/")
   };
 

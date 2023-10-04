@@ -1,10 +1,13 @@
 import React from "react";
 import { Provider } from "react-redux";
 // import userAuthStore from "./redux/stores/userAuthStore";
-import quizStore from "./redux/stores/quizStore";
+import { createStore } from "redux";
+import quizReducer from "./redux/reducers/quizReducer";
 import "./index.css";
 import App from "./App";
 import ReactDOM from "react-dom";
+
+const quizStore = createStore(quizReducer);
 
 ReactDOM.render(
   <React.StrictMode>

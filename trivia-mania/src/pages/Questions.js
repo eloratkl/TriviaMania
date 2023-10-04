@@ -1,15 +1,15 @@
-import { Button, CircularProgress, Typography } from "@mui/material"; // Import Button, CircularProgress, and Typography components from Material-UI
-import { Box } from "@mui/system"; // Import Box component from Material-UI
-import { decode } from "html-entities"; // Import decode function to decode HTML entities
-import { useEffect, useState } from "react"; // Import useEffect and useState from React
-import { useDispatch, useSelector } from "react-redux"; // Import useDispatch and useSelector from react-redux
-import { useNavigate } from "react-router-dom"; // Import useNavigate hook from react-router-dom
-import useAxios from "../hooks/useAxios"; // Import custom useAxios hook
-import { handleScoreChange } from "../redux/actions/quizActions"; // Import action creator
-import styles from "./Questions.module.css"; // Import CSS modules stylesheet as styles
+import { Button, CircularProgress, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import { decode } from "html-entities";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import useAxios from "../hooks/useAxios";
+import { handleScoreChange } from "../redux/actions/quizActions";
+import styles from "./Questions.module.css";
 
 const getRandomInt = (max) => {
-  return Math.floor(Math.random() * Math.floor(max)); // Function to get a random integer
+  return Math.floor(Math.random() * Math.floor(max));
 };
 
 const Questions = () => {
@@ -19,9 +19,9 @@ const Questions = () => {
     question_type,
     amount_of_question,
     score,
-  } = useSelector((state) => state); // Select relevant state values from Redux store
-  const navigate = useNavigate(); // Initialize useNavigate hook to handle navigation
-  const dispatch = useDispatch(); // Initialize useDispatch hook to dispatch actions
+  } = useSelector((state) => state);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   let apiUrl = `/api.php?amount=${amount_of_question}`;
   if (question_category) {
@@ -34,51 +34,51 @@ const Questions = () => {
     apiUrl = apiUrl.concat(`&type=${question_type}`);
   }
 
-  const { response, loading } = useAxios({ url: apiUrl }); // Use custom useAxios hook to fetch data
-  const [questionIndex, setQuestionIndex] = useState(0); // Initialize state for the current question index
-  const [options, setOptions] = useState([]); // Initialize state for answer options
+  const { response, loading } = useAxios({ url: apiUrl });
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [options, setOptions] = useState([]);
 
   useEffect(() => {
     if (response?.results.length) {
-      const question = response.results[questionIndex]; // Get the current question
-      let answers = [...question.incorrect_answers]; // Create a copy of incorrect answers
+      const question = response.results[questionIndex];
+      let answers = [...question.incorrect_answers];
       answers.splice(
         getRandomInt(question.incorrect_answers.length),
         0,
-        question.correct_answer // Insert the correct answer at a random position
+        question.correct_answer
       );
-      setOptions(answers); // Set the answer options state
+      setOptions(answers);
     }
-  }, [response, questionIndex]); // Update answer options when response or question index changes
+  }, [response, questionIndex]);
 
   if (loading) {
     return (
       <Box mt={20}>
-        <CircularProgress /> {/* Show loading spinner while data is loading */}
+        <CircularProgress />
       </Box>
     );
   }
+
   const handleClickAnswer = (e) => {
-    const question = response.results[questionIndex]; // Get the current question
+    const question = response.results[questionIndex];
     if (e.target.textContent === question.correct_answer) {
-      dispatch(handleScoreChange(score + 1)); // Increment the score if the answer is correct
+      dispatch(handleScoreChange(score + 1));
     }
 
     if (questionIndex + 1 < response.results.length) {
-      setQuestionIndex(questionIndex + 1); // Move to the next question if available
+      setQuestionIndex(questionIndex + 1);
     } else {
-      navigate("/score"); // Use navigate to go to the score route when all questions are answered
+      navigate("/score");
     }
   };
 
   return (
     <Box className={styles.questionContainer}>
       <Typography variant="h4" className={styles.questionHeader}>
-        Questions {questionIndex + 1} {/* Display the question number */}
+        Questions {questionIndex + 1}
       </Typography>
       <Typography className={styles.questionText}>
-        {decode(response.results[questionIndex].question)}{" "}
-        {/* Display the decoded question */}
+        {decode(response.results[questionIndex].question)}
       </Typography>
       <div className={styles.answerOptions}>
         {options.map((data, id) => (
@@ -88,16 +88,15 @@ const Questions = () => {
             variant="contained"
             className={styles.answerButton}
           >
-            {decode(data)} {/* Display the decoded answer options */}
+            {decode(data)}
           </Button>
         ))}
       </div>
       <Typography mt={5}>
-        Score: {score} / {response.results.length}{" "}
-        {/* Display the current score */}
+        Score: {score} / {response.results.length}
       </Typography>
     </Box>
   );
 };
 
-export default Questions; // Export the Questions component
+export default Questions;
