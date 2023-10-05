@@ -8,10 +8,6 @@ import useAxios from "../hooks/useAxios";
 import { handleScoreChange } from "../redux/actions/quizActions";
 import styles from "./Questions.module.css";
 
-const getRandomInt = (max) => {
-  return Math.floor(Math.random() * Math.floor(max));
-};
-
 const Questions = () => {
   const {
     question_category,
@@ -41,12 +37,8 @@ const Questions = () => {
   useEffect(() => {
     if (response?.results.length) {
       const question = response.results[questionIndex];
-      let answers = [...question.incorrect_answers];
-      answers.splice(
-        getRandomInt(question.incorrect_answers.length),
-        0,
-        question.correct_answer
-      );
+      let answers = [question.correct_answer, ...question.incorrect_answers];
+      answers = shuffleArray(answers); // Shuffle the answers randomly
       setOptions(answers);
     }
   }, [response, questionIndex]);
@@ -61,7 +53,10 @@ const Questions = () => {
 
   const handleClickAnswer = (e) => {
     const question = response.results[questionIndex];
-    if (e.target.textContent === question.correct_answer) {
+    const selectedAnswer = e.target.textContent;
+
+    if (selectedAnswer === question.correct_answer) {
+      // Check if the selected answer is correct
       dispatch(handleScoreChange(score + 1));
     }
 
@@ -70,6 +65,16 @@ const Questions = () => {
     } else {
       navigate("/score");
     }
+  };
+
+  // Shuffle array function
+  const shuffleArray = (array) => {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+    return shuffledArray;
   };
 
   return (
