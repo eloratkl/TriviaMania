@@ -1,0 +1,22 @@
+/* Define CSS classes for styling */
+.questionContainer {
+  margin-top: 2rem;
+}
+
+.questionHeader {
+  font-size: 1.5rem;
+}
+
+.questionText {
+  margin-top: 1rem;
+}
+
+.answerOptions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.answerButton {
+  width: 100%;
+}
