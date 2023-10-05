@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import SelectField from "../components/SelectField";
 import TextFieldComp from "../components/TextFieldComp";
 import useAxios from "../hooks/useAxios";
+import styles from "./Settings.module.css";
 
 const Settings = () => {
   const { response, error, loading } = useAxios({ url: "/api_category.php" });
@@ -42,17 +43,22 @@ const Settings = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <SelectField options={response.trivia_categories} label="Category" />
-      <SelectField options={difficultyOptions} label="Difficulty" />
-      <SelectField options={typeOptions} label="Type" />
-      <TextFieldComp />
-      <Box mt={3} width="100%">
-        <Button fullWidth variant="contained" type="submit">
-          Get Started
-        </Button>
-      </Box>
-    </form>
+    <div className={styles["settings-container"]}>
+      <Typography variant="h2" fontWeight="bold" alignItems="center" >
+        Settings ⚙️
+      </Typography>
+      <form onSubmit={handleSubmit}>
+        <SelectField fullWidth variant= "contained" options={response.trivia_categories} label="Category" />
+        <SelectField fullWidth variant= "contained" options={difficultyOptions} label="Difficulty" />
+        <SelectField fullWidth variant= "contained" options={typeOptions} label="Type" />
+        <TextFieldComp />
+        <Box mt={3} width="100%">
+          <Button fullWidth variant="contained" type="submit" className={styles["settings-button"]}>
+            Start!
+          </Button>
+        </Box>
+      </form>
+    </div>
   );
 };
 
