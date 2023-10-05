@@ -14,6 +14,7 @@
 
 .App {
   text-align: center;
+  background-color: var(--background, #3189FF);
 }
 
 .quiz-container {
@@ -115,6 +116,39 @@
   background-color: #f1f1f1;
   padding: 20px;
 }
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #3189FF; /* Adjust the background color as needed */
+}
+
+.menuItems {
+  flex: 1;
+  display: flex;
+  gap: 20px; /* Adjust the gap between menu items as needed */
+}
+
+.menuItem a {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  color: white; /* Adjust the text color as needed */
+  font-weight: bold;
+}
+
+.menuAuth {
+  display: block;
+}
+
+/* Style the "Logout" link differently if needed */
+.menuAuth .menuItem:last-child {
+  color: #fff; /* Change the color for the "Logout" link */
+  cursor: pointer;
+}
+
 
 @keyframes rotation {
   from {

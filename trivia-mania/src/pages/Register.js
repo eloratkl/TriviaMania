@@ -1,23 +1,26 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../api/api"; // Import signup from your external module
+import styles from "./Register.module.css"; // Import your CSS file
 
 export const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: "", // Add input for name
-    email: "", // Add input for email
+    name: "",
+    email: "",
     password: "",
   });
   const [error, setError] = useState(null);
 
   const handleSignup = async () => {
     try {
-      // Use the signup function from your external module
-      const success = await signup(formData.name, formData.email, formData.password);
+      const success = await signup(
+        formData.name,
+        formData.email,
+        formData.password
+      );
 
       if (success) {
-        // If signup is successful, you can navigate to a different page (e.g., dashboard).
         navigate("/login");
       } else {
         setError("Signup failed. Please try again.");
@@ -29,11 +32,13 @@ export const Register = () => {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
+    <div className={styles.registerContainer}>
+      <h2 className={styles.header}>Be Trivia Maniac!</h2>
       <form>
-        <div>
-          <label htmlFor="name">Name</label>
+        <div className={styles.inputContainer}>
+          <label htmlFor="name" className={styles.label}>
+            Name*
+          </label>
           <input
             type="text"
             id="name"
@@ -42,10 +47,14 @@ export const Register = () => {
             onChange={(e) =>
               setFormData({ ...formData, name: e.target.value })
             }
+            className={styles.inputField}
+            placeholder="Your Name"
           />
         </div>
-        <div>
-          <label htmlFor="email">Email</label>
+        <div className={styles.inputContainer}>
+          <label htmlFor="email" className={styles.label}>
+            Email Address*
+          </label>
           <input
             type="email"
             id="email"
@@ -54,10 +63,14 @@ export const Register = () => {
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
             }
+            className={styles.inputField}
+            placeholder="Your Email Address"
           />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
+        <div className={styles.inputContainer}>
+          <label htmlFor="password" className={styles.label}>
+            Password*
+          </label>
           <input
             type="password"
             id="password"
@@ -66,9 +79,11 @@ export const Register = () => {
             onChange={(e) =>
               setFormData({ ...formData, password: e.target.value })
             }
+            className={styles.inputField}
+            placeholder="Your Password"
           />
         </div>
-        <button type="button" onClick={handleSignup}>
+        <button type="button" onClick={handleSignup} className={styles.signupButton}>
           Sign Up
         </button>
         {error && <p>{error}</p>}

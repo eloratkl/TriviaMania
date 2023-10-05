@@ -1,7 +1,7 @@
-// Login.js
 import React, { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthData } from "../auth/AuthWrapper";
+import styles from "./Login.module.css";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -38,31 +38,40 @@ export const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className={styles.loginContainer}>
       <form>
-        <div>
-          <label htmlFor="email">Email</label>
+        <div className={styles.inputContainer}>
+          <div className={styles.inputHeader}>
+            <label htmlFor="email" className={styles.label}>
+              Email address
+            </label>
+          </div>
           <input
             type="text"
             id="email"
             name="email"
             value={formData.email}
             onChange={handleEmailChange}
+            className={styles.inputField}
           />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
+        <div className={styles.inputContainer}>
+          <div className={styles.inputHeader}>
+            <label htmlFor="password" className={styles.label}>
+              Password
+            </label>
+          </div>
           <input
             type="password"
             id="password"
             name="password"
             value={formData.password}
             onChange={handlePasswordChange}
+            className={styles.inputField}
           />
         </div>
-        <button type="button" onClick={handleLoginSubmit}>
-          Login
+        <button type="button" onClick={handleLoginSubmit} className={styles.loginButton}>
+          Log In
         </button>
         {error && <p>{error}</p>}
       </form>
