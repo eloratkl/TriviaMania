@@ -8,6 +8,7 @@ import useAxios from "../hooks/useAxios";
 import { handleScoreChange } from "../redux/actions/quizActions";
 import styles from "./Questions.module.css";
 
+
 const Questions = () => {
   const {
     question_category,
@@ -77,11 +78,26 @@ const Questions = () => {
     return shuffledArray;
   };
 
+  const handleBackToSettings = () => {
+    navigate("/"); // Use navigate to go back to the home route ("/")
+  };
+
+  if((response?.results.length) === 0){
+    return ( 
+      <Box mt={30}>
+      <Typography variant="h5" fontWeight="bold" mb={3}>
+        Limited Questions only! {/* Display the final score */}
+      </Typography>
+      <Button onClick={handleBackToSettings} variant="outlined">
+        Back to settings! {/* Display a button to navigate back to settings */}
+      </Button>
+    </Box>
+    )
+  }else{
+
   return (
     <Box className={styles.questionContainer}>
-      <Typography variant="h4" className={styles.questionHeader}>
-        Questions {questionIndex + 1}
-      </Typography>
+
       <Typography className={styles.questionText}>
         {decode(response.results[questionIndex].question)}
       </Typography>
@@ -102,6 +118,7 @@ const Questions = () => {
       </Typography>
     </Box>
   );
+        }
 };
 
 export default Questions;
