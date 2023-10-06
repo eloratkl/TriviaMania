@@ -1,30 +1,50 @@
-import { Button, Typography } from "@mui/material"; // Import Button and Typography components from Material-UI
-import { Box } from "@mui/system"; // Import Box component from Material-UI
-import { useDispatch, useSelector } from "react-redux"; // Import useDispatch hook from react-redux
-import { useNavigate } from "react-router-dom"; // Import useNavigate hook from react-router-dom
-import { handleAmountChange, handleScoreChange } from "../redux/actions/quizActions"; // Import action creators
+import React from "react";
+import { Box } from "@mui/system";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  handleAmountChange,
+  handleScoreChange,
+} from "../redux/actions/quizActions";
+import styles from "./FinalScreen.module.css"; // Import the CSS module
 
 const FinalScreen = () => {
-  const dispatch = useDispatch(); // Initialize useDispatch hook to dispatch actions
-  const navigate = useNavigate(); // Initialize useNavigate hook to handle navigation
-  const { score } = useSelector((state) => state); // Select the 'score' state from Redux store
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { score } = useSelector((state) => state);
 
   const handleBackToSettings = () => {
-    dispatch(handleScoreChange(0)); // Dispatch action to reset the score to 0
-    dispatch(handleAmountChange(50)); // Dispatch action to reset the amount to 50
-    navigate("/"); // Use navigate to go back to the home route ("/")
+    dispatch(handleScoreChange(0));
+    dispatch(handleAmountChange(50));
+    navigate("/");
   };
 
   return (
-    <Box mt={30}>
-      <Typography variant="h3" fontWeight="bold" mb={3}>
-        Final Score {score} {/* Display the final score */}
-      </Typography>
-      <Button onClick={handleBackToSettings} variant="outlined">
-        Back to settings! {/* Display a button to navigate back to settings */}
-      </Button>
+    <Box className={styles.finalScreenContainer}>
+      <div className={styles.header}>
+        Way to go!
+      </div>
+      <div className={styles.card}>
+        <div className={styles.cardHeader}>
+          Your Score
+        </div>
+        <div className={styles.score}>
+          {score}
+        </div>
+        <div className={styles.totalTime}>
+          Total Time: --:-- (mins:secs)
+        </div>
+      </div>
+      <button
+        type="button"
+        onClick={handleBackToSettings}
+        className={styles.settingsButton}
+      >
+        Back to Settings
+      </button>
     </Box>
   );
 };
 
-export default FinalScreen; // Export the FinalScreen component
+export default FinalScreen;
+
