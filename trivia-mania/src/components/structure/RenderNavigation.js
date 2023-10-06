@@ -33,29 +33,36 @@ export const RenderMenu = () => {
 
   return (
     <div className="menu">
-      {nav.map((r, i) => {
-        if ((!r.isPrivate && r.isMenu) || (r.path === "/register" && !user.isAuthenticated)) {
-          return <MenuItem key={i} r={r} />;
-        } else if (user.isAuthenticated && r.isMenu) {
-          return <MenuItem key={i} r={r} />;
-        } else return null;
-      })}
+      <div className="menuItems">
+        {nav.map((r, i) => {
+          if (
+            (!r.isPrivate && r.isMenu) ||
+            (r.path === "/register" && !user.isAuthenticated)
+          ) {
+            return <MenuItem key={i} r={r} />;
+          } else if (user.isAuthenticated && r.isMenu) {
+            return <MenuItem key={i} r={r} />;
+          } else return null;
+        })}
+      </div>
 
-      {user.isAuthenticated ? (
-        <div className="menuItem" onClick={logout}>
-          Logout
-        </div>
-      ) : (
-        <div className="menuItem">
-          <Link to="/login">Login</Link>
-        </div>
-      )}
+      <div className="menuAuth">
+        {user.isAuthenticated ? (
+          <div className="menuItem" onClick={logout}>
+            Logout
+          </div>
+        ) : (
+          <div className="menuItem">
+            <Link to="/login">Login</Link>
+          </div>
+        )}
 
-      {!user.isAuthenticated && !hasRegisterLink && (
-        <div className="menuItem">
-          <Link to="/register">Register</Link>
-        </div>
-      )}
+        {!user.isAuthenticated && !hasRegisterLink && (
+          <div className="menuItem">
+            <Link to="/register">Register</Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
