@@ -22,7 +22,7 @@ const TextFieldComp = () => {
           label="Amount of Questions"
           type="number"
           size="small"
-          InputProps={{ inputProps: { min: 0 , max: 50}  }} // Set min value to 0
+          InputProps={{ inputProps: { min: 1 , max: 50}  }} // Set min value to 1  max value to 50
         />
       </FormControl>
     </Box>
