@@ -32,7 +32,7 @@ const FinalScreen = () => {
           {score}
         </div>
         <div className={styles.totalTime}>
-          Total Time: --:-- (mins:secs)
+          Total Time: --:--
         </div>
       </div>
       <button
@@ -47,4 +47,3 @@ const FinalScreen = () => {
 };
 
 export default FinalScreen;
-
