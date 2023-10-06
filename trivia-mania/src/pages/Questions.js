@@ -21,6 +21,7 @@ const Questions = () => {
   const dispatch = useDispatch();
 
   let apiUrl = `/api.php?amount=${amount_of_question}`;
+
   if (question_category) {
     apiUrl = apiUrl.concat(`&category=${question_category}`);
   }
@@ -99,6 +100,9 @@ const Questions = () => {
     <Box className={styles.questionContainer}>
 
       <Typography className={styles.questionText}>
+        Question:{questionIndex +1}
+      </Typography>
+      <Typography className={styles.questionText}>
         {decode(response.results[questionIndex].question)}
       </Typography>
       <div className={styles.answerOptions}>
@@ -114,7 +118,8 @@ const Questions = () => {
         ))}
       </div>
       <Typography mt={5}>
-        Score: {score} / {response.results.length}
+        {/* Score: {score} / {response.results.length} */}
+        Score: {score} / {amount_of_question}
       </Typography>
     </Box>
   );
