@@ -5,18 +5,21 @@ import { useNavigate } from "react-router-dom";
 import {
   handleAmountChange,
   handleScoreChange,
+  handleTotalTimeChange,
 } from "../redux/actions/quizActions";
 import styles from "./FinalScreen.module.css"; // Import the CSS module
+
 
 const FinalScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { score } = useSelector((state) => state);
+  const { score, amount_of_question, timeUsed} = useSelector((state) => state);
 
   const handleBackToSettings = () => {
     dispatch(handleScoreChange(0));
     dispatch(handleAmountChange(50));
-    navigate("/");
+    dispatch(handleTotalTimeChange(0));
+    navigate("/settings");
   };
 
   return (
@@ -29,10 +32,12 @@ const FinalScreen = () => {
           Your Score
         </div>
         <div className={styles.score}>
-          {score}
+        {score} / {amount_of_question}
         </div>
         <div className={styles.totalTime}>
-          Total Time: --:--
+       
+          {/* Total Time: --:-- */}
+          Total Time Used: {timeUsed + 1} seconds
         </div>
       </div>
       <button
