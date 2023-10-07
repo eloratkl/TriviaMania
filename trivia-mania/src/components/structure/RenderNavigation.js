@@ -1,7 +1,7 @@
 import { Link, Route, Routes } from "react-router-dom";
 import { AuthData } from "../../auth/AuthWrapper";
 import { nav } from "./navigation";
-import logoLong from "/Users/meowdaline/Desktop/SCTP/Trivia Mania React Quiz/TriviaMania/trivia-mania/src/assets/logoLong.png";
+import logoLong from "../../assets/logoLong.png";
 import styles from "./RenderNavigation.module.css";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
