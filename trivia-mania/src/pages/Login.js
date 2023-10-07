@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import React, { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthData } from "../auth/AuthWrapper";
-import styles from "./Login.module.css";
+import styles from "./LoginSignUp.module.css";
 // import "../App.css";
+
+import Card from "../components/structure/Card";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -40,7 +42,7 @@ export const Login = () => {
   };
 
   return (
-    <div className={styles.loginContainer}>
+    <Card>
       <form>
         <h2>Welcome Back Champ!</h2>
 
@@ -84,6 +86,6 @@ export const Login = () => {
         </p>
         {error && <p>{error}</p>}
       </form>
-    </div>
+    </Card>
   );
 };

@@ -1,7 +1,11 @@
+// Register.js
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../api/api"; // Import signup from your external module
-import styles from "./Register.module.css"; // Import your CSS file
+import styles from "./LoginSignUp.module.css";
+
+import Card from "../components/structure/Card";
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -32,7 +36,7 @@ export const Register = () => {
   };
 
   return (
-    <div className={styles.registerContainer}>
+    <Card>
       <h2 className={styles.header}>Be Trivia Maniac!</h2>
       <form>
         <div className={styles.inputContainer}>
@@ -44,14 +48,11 @@ export const Register = () => {
             id="name"
             name="name"
             value={formData.name}
-            onChange={(e) =>
-              setFormData({ ...formData, name: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className={styles.inputField}
             placeholder="Your Name"
           />
-        </div>
-        <div className={styles.inputContainer}>
+
           <label htmlFor="email" className={styles.label}>
             Email Address*
           </label>
@@ -66,8 +67,7 @@ export const Register = () => {
             className={styles.inputField}
             placeholder="Your Email Address"
           />
-        </div>
-        <div className={styles.inputContainer}>
+
           <label htmlFor="password" className={styles.label}>
             Password*
           </label>
@@ -83,11 +83,11 @@ export const Register = () => {
             placeholder="Your Password"
           />
         </div>
-        <button type="button" onClick={handleSignup} className={styles.signupButton}>
+        <button type="button" onClick={handleSignup} className="buttonLight">
           Sign Up
         </button>
         {error && <p>{error}</p>}
       </form>
-    </div>
+    </Card>
   );
 };
