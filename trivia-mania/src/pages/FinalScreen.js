@@ -9,11 +9,14 @@ import {
 } from "../redux/actions/quizActions";
 import styles from "./FinalScreen.module.css"; // Import the CSS module
 
-
 const FinalScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { score, amount_of_question, timeUsed} = useSelector((state) => state);
+  const { score, amount_of_question, timeUsed } = useSelector((state) => state);
+
+  // Convert timeUsed from seconds to minutes and seconds
+  const minutes = Math.floor(timeUsed / 60);
+  const seconds = timeUsed % 60;
 
   const handleBackToSettings = () => {
     dispatch(handleScoreChange(0));
@@ -24,20 +27,15 @@ const FinalScreen = () => {
 
   return (
     <Box className={styles.finalScreenContainer}>
-      <div className={styles.header}>
-        Way to go!
-      </div>
+      <div className={styles.header}>Way to go!</div>
       <div className={styles.card}>
-        <div className={styles.cardHeader}>
-          Your Score
-        </div>
+        <div className={styles.cardHeader}>Your Score</div>
         <div className={styles.score}>
-        {score} / {amount_of_question}
+          {score} / {amount_of_question}
         </div>
         <div className={styles.totalTime}>
-       
-          {/* Total Time: --:-- */}
-          Total Time Used: {timeUsed + 1} seconds
+          Total Time: {minutes.toString().padStart(2, "0")}:
+          {seconds.toString().padStart(2, "0")} min
         </div>
       </div>
       <button
