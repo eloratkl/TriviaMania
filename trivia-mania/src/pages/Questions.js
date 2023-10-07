@@ -37,7 +37,6 @@ const Questions = () => {
   const [timerExpired, setTimerExpired] = useState(false);
   const [totalTimeUsed, setTotalTimeUsed] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
-
   let seconds = 10;
 
   let apiUrl = `/api.php?amount=${amount_of_question}`;
@@ -133,21 +132,24 @@ const Questions = () => {
   };
 
   const handleBackToSettings = () => {
-    navigate("/"); // Use navigate to go back to the home route ("/")
+    navigate("/settings"); // Use navigate to go back to the home route ("/")
   };
 
-  if (response?.results.length === 0) {
+  const renderNoQuestions = () => {
     return (
-      <div className={styles.questionCard}>
+      <div className={styles.questionContainer}>
         <Typography variant="h5" fontWeight="bold" mb={3}>
           Limited Questions only! {/* Display the final score */}
         </Typography>
         <Button onClick={handleBackToSettings} variant="outlined">
-          Back to settings!{" "}
-          {/* Display a button to navigate back to settings */}
+          Back to settings! {/* Display a button to navigate back to settings */}
         </Button>
       </div>
     );
+  };
+
+  if (response?.results.length === 0) {
+    return renderNoQuestions();
   } else {
     return (
       <div className={styles.questionCard}>

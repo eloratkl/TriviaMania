@@ -1,6 +1,10 @@
 import { Link, Route, Routes } from "react-router-dom";
 import { AuthData } from "../../auth/AuthWrapper";
 import { nav } from "./navigation";
+import logoLong from "../../assets/logoLong.png";
+import styles from "./RenderNavigation.module.css";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 
 export const RenderRoutes = () => {
   const { user } = AuthData();
@@ -19,50 +23,83 @@ export const RenderRoutes = () => {
 };
 
 export const RenderMenu = () => {
+  const [navIsExpanded, setNavIsExpanded] = useState(false);
   const { user, logout } = AuthData();
 
   const MenuItem = ({ r }) => {
     return (
-      <div className="menuItem">
+      <li className={styles.menuItem}>
         <Link to={r.path}>{r.name}</Link>
-      </div>
+      </li>
     );
   };
 
   const hasRegisterLink = nav.some((r) => r.path === "/register");
 
   return (
-    <div className="menu">
-      <div className="menuItems">
-        {nav.map((r, i) => {
-          if (
-            (!r.isPrivate && r.isMenu) ||
-            (r.path === "/register" && !user.isAuthenticated)
-          ) {
-            return <MenuItem key={i} r={r} />;
-          } else if (user.isAuthenticated && r.isMenu) {
-            return <MenuItem key={i} r={r} />;
-          } else return null;
-        })}
+    <nav>
+      {/* Mobile Burger Menu */}
+      {/* icon from heroicons.com */}
+      <button
+        className={styles.hamburger}
+        onClick={() => {
+          setNavIsExpanded(!navIsExpanded);
+        }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="white"
+          viewBox="0 0 24 24"
+          strokeWidth={2}
+          stroke="white"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
+          />
+        </svg>
+      </button>
+
+      <div className={styles.logo}>
+        <Link to="/">
+          <img src={logoLong} alt="Trivia Mania Logo" />
+        </Link>
       </div>
 
-      <div className="menuAuth">
-        {user.isAuthenticated ? (
-          <div className="menuItem" onClick={logout}>
-            Logout
-          </div>
-        ) : (
-          <div className="menuItem">
-            <Link to="/login">Login</Link>
-          </div>
-        )}
+      <ul className={navIsExpanded ? "" : styles.expanded}>
+        <div className={styles.navbar_left}>
+          {nav.map((r, i) => {
+            if (
+              (!r.isPrivate && r.isMenu) ||
+              (r.path === "/register" && !user.isAuthenticated)
+            ) {
+              return <MenuItem key={i} r={r} />;
+            } else if (user.isAuthenticated && r.isMenu) {
+              return <MenuItem key={i} r={r} />;
+            } else return null;
+          })}
+        </div>
 
-        {!user.isAuthenticated && !hasRegisterLink && (
-          <div className="menuItem">
-            <Link to="/register">Register</Link>
-          </div>
-        )}
-      </div>
-    </div>
+        <div className={styles.navbar_right}>
+          {user.isAuthenticated ? (
+            <li className={styles.menuItem} onClick={logout}>
+              <Link to="/">Logout</Link>
+            </li>
+          ) : (
+            <li className={styles.menuItem}>
+              <Link to="/login">Login</Link>
+            </li>
+          )}
+
+          {!user.isAuthenticated && !hasRegisterLink && (
+            <li className={styles.menuItem}>
+              <Link to="/register">Register</Link>
+            </li>
+          )}
+        </div>
+      </ul>
+    </nav>
   );
 };

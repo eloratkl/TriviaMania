@@ -13,7 +13,7 @@ export const CHANGE_AMOUNT = "CHANGE_AMOUNT";
 // Define a constant variable for changing the user's score
 export const CHANGE_SCORE = "CHANGE_SCORE";
 
-// Define a constant variable for changing the user's score
+// Define a constant variable for changing the total time used
 export const CHANGE_TOTALTIME = "CHANGE_TOTALTIME";
 
 // Define a constant variable for pause functionality

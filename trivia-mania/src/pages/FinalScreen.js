@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -26,14 +25,18 @@ const FinalScreen = () => {
   };
 
   return (
-    <Box className={styles.finalScreenContainer}>
-      <div className={styles.header}>Way to go!</div>
+    <div className={styles.finalScreenContainer}>
+      <div className={styles.header}>
+        Way to go!
+      </div>
       <div className={styles.card}>
         <div className={styles.cardHeader}>Your Score</div>
         <div className={styles.score}>
           {score} / {amount_of_question}
         </div>
         <div className={styles.totalTime}>
+
+          {/* Total Time: --:-- */}
           Total Time: {minutes.toString().padStart(2, "0")}:
           {seconds.toString().padStart(2, "0")} min
         </div>
@@ -45,7 +48,7 @@ const FinalScreen = () => {
       >
         Back to Settings
       </button>
-    </Box>
+    </div>
   );
 };
 

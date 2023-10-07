@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom";
 import React, { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthData } from "../auth/AuthWrapper";
-import styles from "./Login.module.css";
+import styles from "./LoginSignUp.module.css";
+// import "../App.css";
+
+import Card from "../components/structure/Card";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -38,14 +42,16 @@ export const Login = () => {
   };
 
   return (
-    <div className={styles.loginContainer}>
+    <Card>
       <form>
+        <h2>Welcome Back Champ!</h2>
+
         <div className={styles.inputContainer}>
-          <div className={styles.inputHeader}>
+          <p>
             <label htmlFor="email" className={styles.label}>
-              Email address
+              Email address*:
             </label>
-          </div>
+          </p>
           <input
             type="text"
             id="email"
@@ -53,14 +59,14 @@ export const Login = () => {
             value={formData.email}
             onChange={handleEmailChange}
             className={styles.inputField}
+            placeholder="stacysmom@gmail.com"
           />
-        </div>
-        <div className={styles.inputContainer}>
-          <div className={styles.inputHeader}>
+
+          <p>
             <label htmlFor="password" className={styles.label}>
-              Password
+              Enter Password*:
             </label>
-          </div>
+          </p>
           <input
             type="password"
             id="password"
@@ -68,13 +74,18 @@ export const Login = () => {
             value={formData.password}
             onChange={handlePasswordChange}
             className={styles.inputField}
+            placeholder="Password"
           />
         </div>
-        <button type="button" onClick={handleLoginSubmit} className={styles.loginButton}>
+
+        <button className="buttonLight" type="button" onClick={handleLoginSubmit}>
           Log In
         </button>
+        <p className={styles.info}>
+          Don’t have an account? <Link to="/register">Sign up</Link> instead!
+        </p>
         {error && <p>{error}</p>}
       </form>
-    </div>
+    </Card>
   );
 };

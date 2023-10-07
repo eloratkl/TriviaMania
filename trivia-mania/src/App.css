@@ -1,4 +1,3 @@
-
 :root {
   --gradient: linear-gradient(60deg, #141b2d, #6870fa, #141b2d);
   --myGrey: #666666;
@@ -6,15 +5,18 @@
   --myDarkBlue: #141b2d;
   --myGreen: #4cceac;
   --myRed: #db4f4a;
+  --black-text: #331646;
+  --transition: all 0.3s ease-in-out;
+  --background: #3189FF;
 
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+  /* --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace; */
 }
 
 .App {
   text-align: center;
-  background-color: var(--background, #3189FF);
+  background-color: var(--background);
 }
 
 .quiz-nav {
@@ -69,44 +71,60 @@
   padding: 20px;
 }
 
-.menu {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  background-color: #3189FF; /* Adjust the background color as needed */
-}
-
-.menuItems {
-  flex: 1;
-  display: flex;
-  gap: 20px; /* Adjust the gap between menu items as needed */
-}
-
-.menuItem a {
-  flex: 1;
-  text-align: center;
-  text-decoration: none;
-  color: white; /* Adjust the text color as needed */
-  font-weight: bold;
-}
-
-.menuAuth {
-  display: block;
-}
-
-/* Style the "Logout" link differently if needed */
-.menuAuth .menuItem:last-child {
-  color: #fff; /* Change the color for the "Logout" link */
-  cursor: pointer;
+h2 {
+  color: var(--black-text, #331646);
+    text-align: center;
+    font-family: Poppins;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.5em;
+    padding-bottom: 20px;
 }
 
 
-@keyframes rotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
+
+/* Buttons */
+button.buttonLight,
+button.buttonDark {
+  padding: 15px 25px;
+  border-radius: 40px;
+  border: none;
+  height: auto;
+  width: 150px;
+  /* margin: 20px 0; */
+}
+
+/* For light background */
+.buttonLight {
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  background: linear-gradient(0deg, rgba(150, 68, 198, 1) 0%, rgba(142, 242, 255, 1) 100%);
+  filter: drop-shadow(0px 4px 4px rgba(150, 68, 198, 0.3));
+  transition: var(--transition);
+}
+
+.buttonLight:hover {
+  margin-top: 3px;
+  margin-bottom: -3px;
+  filter: none;
+  color: #dadada;
+}
+
+
+/* For dark background */
+.buttonDark {
+  color: linear-gradient(0deg, rgba(150, 68, 198, 1) 0%, rgba(142, 242, 255, 1) 100%);
+  background-color: #fff;
+  filter: drop-shadow(0px 5px 8px #0163E8);
+  transition: var(--transition);
+}
+
+.buttonDark:hover {
+  color: #f0f0f0;
+  background-color: grey
+    /*test*/
+
 }

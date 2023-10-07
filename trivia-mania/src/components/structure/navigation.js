@@ -7,7 +7,7 @@ import FinalScreen from "../../pages/FinalScreen";
 import Leaderboard from "../../pages/Leaderboard";
 import { Login } from "../../pages/Login";
 import { Register } from "../../pages/Register";
-import { Private } from "../../pages/Private";
+// import { Private } from "../../pages/Private";
 
 export const nav = [
   {
@@ -38,13 +38,13 @@ export const nav = [
     isMenu: false,
     isPrivate: false,
   },
-  {
-    path: "/private",
-    name: "Private",
-    element: <Private />,
-    isMenu: true,
-    isPrivate: true,
-  },
+  // {
+  //   path: "/private",
+  //   name: "Private",
+  //   element: <Private />,
+  //   isMenu: false,
+  //   isPrivate: true,
+  // },
   {
     path: "/account",
     name: "Account",
