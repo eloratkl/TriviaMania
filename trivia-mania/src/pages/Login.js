@@ -3,6 +3,7 @@ import React, { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthData } from "../auth/AuthWrapper";
 import styles from "./Login.module.css";
+// import "../App.css";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -75,7 +76,7 @@ export const Login = () => {
           />
         </div>
 
-        <button className={styles.button_light} type="button" onClick={handleLoginSubmit}>
+        <button className="buttonLight" type="button" onClick={handleLoginSubmit}>
           Log In
         </button>
         <p className={styles.info}>
