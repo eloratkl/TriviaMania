@@ -1,16 +1,19 @@
 import React from "react";
 import { Provider } from "react-redux";
-// import userAuthStore from "./redux/stores/userAuthStore";
-import quizStore from "./redux/stores/quizStore";
+import { createStore } from "redux";
+import quizReducer from "./redux/reducers/quizReducer";
 import "./index.css";
 import App from "./App";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
-ReactDOM.render(
+const quizStore = createStore(quizReducer);
+const container = document.getElementById('app');
+const root = createRoot(container);
+
+root.render(
   <React.StrictMode>
     <Provider store={quizStore}>
-      <App />
+      <App tab="home" />
     </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );

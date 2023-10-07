@@ -1,16 +1,26 @@
-import { Button, CircularProgress, Typography } from "@mui/material"; // Import Button, CircularProgress, and Typography components from Material-UI
-import { Box } from "@mui/system"; // Import Box component from Material-UI
-import { decode } from "html-entities"; // Import decode function to decode HTML entities
-import { useEffect, useState } from "react"; // Import useEffect and useState from React
-import { useDispatch, useSelector } from "react-redux"; // Import useDispatch and useSelector from react-redux
-import { useNavigate } from "react-router-dom"; // Import useNavigate hook from react-router-dom
-import useAxios from "../hooks/useAxios"; // Import custom useAxios hook
-import { handleScoreChange } from "../redux/actions/quizActions"; // Import action creator
-import styles from "./Questions.module.css"; // Import CSS modules stylesheet as styles
-
-const getRandomInt = (max) => {
-  return Math.floor(Math.random() * Math.floor(max)); // Function to get a random integer
-};
+import {
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  Typography, } from "@mui/material";
+import { Box } from "@mui/system";
+import { decode } from "html-entities";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import useAxios from "../hooks/useAxios";
+import {
+  handleScoreChange,
+  handleTotalTimeChange,
+  setGamePaused,
+  handleResumeGameAction,
+  handleQuitGameAction,
+} from "../redux/actions/quizActions";
+import styles from "./Questions.module.css";
+import CountdownTimer from "../components/Timer";
+import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline"; // Import the PauseCircleOutline icon
 
 const Questions = () => {
   const {
@@ -18,12 +28,17 @@ const Questions = () => {
     question_difficulty,
     question_type,
     amount_of_question,
-    score,
-  } = useSelector((state) => state); // Select relevant state values from Redux store
-  const navigate = useNavigate(); // Initialize useNavigate hook to handle navigation
-  const dispatch = useDispatch(); // Initialize useDispatch hook to dispatch actions
-
+    score = 0,
+    isPaused,
+  } = useSelector((state) => state);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [timerExpired, setTimerExpired] = useState(false);
+  const [totalTimeUsed, setTotalTimeUsed] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
+  let seconds = 10;
   let apiUrl = `/api.php?amount=${amount_of_question}`;
+
   if (question_category) {
     apiUrl = apiUrl.concat(`&category=${question_category}`);
   }
@@ -34,70 +49,166 @@ const Questions = () => {
     apiUrl = apiUrl.concat(`&type=${question_type}`);
   }
 
-  const { response, loading } = useAxios({ url: apiUrl }); // Use custom useAxios hook to fetch data
-  const [questionIndex, setQuestionIndex] = useState(0); // Initialize state for the current question index
-  const [options, setOptions] = useState([]); // Initialize state for answer options
+  const { response, loading } = useAxios({ url: apiUrl });
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [options, setOptions] = useState([]);
 
   useEffect(() => {
     if (response?.results.length) {
-      const question = response.results[questionIndex]; // Get the current question
-      let answers = [...question.incorrect_answers]; // Create a copy of incorrect answers
-      answers.splice(
-        getRandomInt(question.incorrect_answers.length),
-        0,
-        question.correct_answer // Insert the correct answer at a random position
-      );
-      setOptions(answers); // Set the answer options state
+      const question = response.results[questionIndex];
+      let answers = [question.correct_answer, ...question.incorrect_answers];
+      answers = shuffleArray(answers); // Shuffle the answers randomly
+      setOptions(answers);
     }
-  }, [response, questionIndex]); // Update answer options when response or question index changes
+  }, [response, questionIndex]);
 
   if (loading) {
     return (
       <Box mt={20}>
-        <CircularProgress /> {/* Show loading spinner while data is loading */}
+        <CircularProgress />
       </Box>
     );
   }
+
+
+  const handleTimerEnd = () => {
+    setTimerExpired(true);
+  };
+  const updateTotalTimeUsed = (time) => {
+    setTotalTimeUsed(prevTime => prevTime + time);
+    dispatch(handleTotalTimeChange(totalTimeUsed));
+    //console.log(totalTimeUsed, timeUsed);
+  };
+
+
   const handleClickAnswer = (e) => {
-    const question = response.results[questionIndex]; // Get the current question
-    if (e.target.textContent === question.correct_answer) {
-      dispatch(handleScoreChange(score + 1)); // Increment the score if the answer is correct
+    const question = response.results[questionIndex];
+    const selectedAnswer = e.target.textContent;
+
+    if (selectedAnswer === question.correct_answer) {
+      // Check if the selected answer is correct
+      dispatch(handleScoreChange(score + 1));
     }
 
     if (questionIndex + 1 < response.results.length) {
-      setQuestionIndex(questionIndex + 1); // Move to the next question if available
+      setQuestionIndex(questionIndex + 1);
     } else {
-      navigate("/score"); // Use navigate to go to the score route when all questions are answered
+      navigate("/score");
+    }
+
+  };
+
+  // Shuffle array function
+  const shuffleArray = (array) => {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+    return shuffledArray;
+  };
+
+  const handlePauseGame = () => {
+    if (!isPaused) {
+      dispatch(setGamePaused(true));
+      setShowPopup(true);
+      console.log("Dialog should be displayed now.");
     }
   };
 
-  return (
-    <Box className={styles.questionContainer}>
-      <Typography variant="h4" className={styles.questionHeader}>
-        Questions {questionIndex + 1} {/* Display the question number */}
+  const handleResumeGame = () => {
+    if (showPopup) {
+      dispatch(handleResumeGameAction());
+      setShowPopup(false);
+    }
+  };
+
+  const handleQuitGame = () => {
+    dispatch(handleQuitGameAction());
+    setShowPopup(false);
+    navigate("/score");
+  };
+
+  const handleBackToSettings = () => {
+    navigate("/settings"); // Use navigate to go back to the home route ("/")
+  };
+
+  if((response?.results.length) === 0){
+    return (
+      <div className={styles.questionContainer} >
+      <Typography variant="h5" fontWeight="bold" mb={3}>
+        Limited Questions only! {/* Display the final score */}
       </Typography>
-      <Typography className={styles.questionText}>
-        {decode(response.results[questionIndex].question)}{" "}
-        {/* Display the decoded question */}
-      </Typography>
-      <div className={styles.answerOptions}>
-        {options.map((data, id) => (
-          <Button
-            key={id}
-            onClick={handleClickAnswer}
-            variant="contained"
-            className={styles.answerButton}
-          >
-            {decode(data)} {/* Display the decoded answer options */}
+      <Button onClick={handleBackToSettings} variant="outlined">
+        Back to settings! {/* Display a button to navigate back to settings */}
+      </Button>
+    </div>
+    )
+  } else {
+    return (
+      <div className={styles.questionCard}>
+        <Button
+          onClick={handlePauseGame}
+          variant="contained"
+          color="primary"
+          className={styles.pauseButton}
+          startIcon={<PauseCircleOutlineIcon />}
+        >
+        </Button>
+        <div className={styles.questionIndex}>
+          Question: {questionIndex + 1}
+        </div>
+        <div className={styles.questionText}>
+          {decode(response.results[questionIndex].question)}
+        </div>
+        <div className={styles.timerContainer}>
+          {/* Pass initial time in seconds */}
+          <CountdownTimer
+            initialTime={amount_of_question * seconds}
+            onTimerEnd={handleTimerEnd}
+            updateTimeUsed={updateTotalTimeUsed}
+          />
+        </div>
+        <div className={styles.answerOptions}>
+          {options.map((data, id) => (
+            <Button
+              key={id}
+              onClick={handleClickAnswer}
+              variant="contained"
+              className={styles.answerButton}
+            >
+              {decode(data)}
+            </Button>
+          ))}
+        </div>
+        <div className={styles.scoreText}>
+          Score: {score} / {amount_of_question}
+        </div>
+        {!timerExpired && (
+          <Button onClick={handleBackToSettings} variant="contained" color="info">
+            Back to settings!
           </Button>
-        ))}
+        )}
+        <Dialog open={showPopup}>
+          <DialogTitle>
+            <Typography variant="h6" align="center">Game Paused</Typography>
+          </DialogTitle>
+          <DialogActions>
+            <Button
+              onClick={handleResumeGame}
+              variant="contained"
+              color="success"
+            >
+              Resume Game
+            </Button>
+            <Button onClick={handleQuitGame} variant="contained" color="error">
+              Quit Game
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
-      <Typography mt={5}>
-        Score: {score} / {response.results.length}{" "}
-        {/* Display the current score */}
-      </Typography>
-    </Box>
-  );
+    );
+  }
 };
 
-export default Questions; // Export the Questions component
+export default Questions;

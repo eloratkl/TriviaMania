@@ -1,14 +1,32 @@
 /* Define CSS classes for styling */
-.questionContainer {
-  margin-top: 2rem;
+.questionCard {
+  width: 1554px;
+  height: 827px;
+  border-radius: 40px;
+  background: #277BED;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
-
-.questionHeader {
-  font-size: 1.5rem;
-}
-
 .questionText {
   margin-top: 1rem;
+  display: flex;
+  width: 1124px;
+  height: 74px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #FFF;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 30px;
 }
 
 .answerOptions {
@@ -18,5 +36,9 @@
 }
 
 .answerButton {
-  width: 100%;
+  width: 600px;
+  height: 100px;
+  background: #FFF;
+  border-radius: 20px;
+  color: var(--black-text, #331646);
 }

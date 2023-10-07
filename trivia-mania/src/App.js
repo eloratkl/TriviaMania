@@ -1,38 +1,47 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { useContext } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Homepage from "./pages/Homepage";
 import Settings from "./pages/Settings";
 import Questions from "./pages/Questions";
 import FinalScreen from "./pages/FinalScreen";
 import Leaderboard from "./pages/Leaderboard";
+import { AuthWrapper, AuthData } from "./auth/AuthWrapper";
 import { Container, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-
+import "./App.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/js/bootstrap.js";
 
 function App() {
   return (
     <Router>
-      <Container maxWidth="sm">
-        <Box textAlign="center" mt={5}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/questions" element={<Questions />} />
-            <Route path="/score" element={<FinalScreen />} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
-          </Routes>
-        </Box>
-      </Container>
+      <AuthWrapper>
+        <Container maxWidth="sm">
+          <Box textAlign={"center"} mt="5">
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <PrivateRoute path="/settings" component={<Settings />} />
+              <PrivateRoute path="/questions" component={<Questions />} />
+              <PrivateRoute path="/score" component={<FinalScreen />} />
+              <PrivateRoute path="/leaderboard" component={<Leaderboard />} />
+            </Routes>
+          </Box>
+        </Container>
+      </AuthWrapper>
     </Router>
   );
 }
 
-function Home() {
-  return (
-    <>
-      <Typography variant="h2" fontWeight="bold">
-        Trivia Mania
-      </Typography>
-      <Settings />
-      {/* <Board /> */}
-    </>
+function PrivateRoute({ element, ...rest }) {
+  const { user } = useContext(AuthData); // Get the user from the AuthData context
+
+  return user.isAuthenticated ? (
+    <Route {...rest} element={element} />
+  ) : (
+    <Typography>
+      Please log in to view this page
+      <Navigate to="/login" />
+    </Typography>
   );
 }
 
