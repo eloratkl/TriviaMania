@@ -8,10 +8,14 @@ import {
 } from "../redux/actions/quizActions";
 import styles from "./FinalScreen.module.css"; // Import the CSS module
 
+
 const FinalScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { score, amount_of_question, timeUsed } = useSelector((state) => state);
+
+  // Calculate the score percentage
+  const scorePercentage = (score / amount_of_question) * 100;
 
   // Convert timeUsed from seconds to minutes and seconds
   const minutes = Math.floor(timeUsed / 60);
@@ -24,19 +28,22 @@ const FinalScreen = () => {
     navigate("/settings");
   };
 
+  // Conditionally set the color based on the score percentage
+  const scoreColor = scorePercentage >= 75 ? "#31cd63" : "#F24E1E";
+
   return (
     <div className={styles.finalScreenContainer}>
       <div className={styles.header}>
-        Way to go!
+        {scorePercentage >= 75 ? "Way to go!" : "Better Luck Next Time"}
       </div>
       <div className={styles.card}>
-        <div className={styles.cardHeader}>Your Score</div>
-        <div className={styles.score}>
+        <div className={styles.cardHeader}>
+          Your Score
+        </div>
+        <div className={styles.score} style={{ color: scoreColor }}>
           {score} / {amount_of_question}
         </div>
         <div className={styles.totalTime}>
-
-          {/* Total Time: --:-- */}
           Total Time: {minutes.toString().padStart(2, "0")}:
           {seconds.toString().padStart(2, "0")} min
         </div>
