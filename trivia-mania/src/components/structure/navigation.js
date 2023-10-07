@@ -7,7 +7,7 @@ import FinalScreen from "../../pages/FinalScreen";
 import Leaderboard from "../../pages/Leaderboard";
 import { Login } from "../../pages/Login";
 import { Register } from "../../pages/Register";
-import { Private } from "../../pages/Private";
+// import { Private } from "../../pages/Private";
 
 export const nav = [
   {
