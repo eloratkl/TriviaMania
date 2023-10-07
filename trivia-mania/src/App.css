@@ -32,18 +32,6 @@
   font-size: large;
 }
 
-.result-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-  height: 200px;
-  margin: auto;
-  margin-bottom: 15px;
-  background-color: var(--myDarkBlue);
-  border-radius: 50%;
-  font-size: x-large;
-}
 .body {
   align-items: center;
   justify-content: center;
