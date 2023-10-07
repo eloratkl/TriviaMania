@@ -1,13 +1,13 @@
+import React, { useEffect, useState } from "react";
 import {
   Button,
   CircularProgress,
   Dialog,
   DialogActions,
   DialogTitle,
-  Typography, } from "@mui/material";
-import { Box } from "@mui/system";
+  Typography,
+} from "@mui/material";
 import { decode } from "html-entities";
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
@@ -33,10 +33,12 @@ const Questions = () => {
   } = useSelector((state) => state);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [timerExpired, setTimerExpired] = useState(false);
   const [totalTimeUsed, setTotalTimeUsed] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   let seconds = 10;
+
   let apiUrl = `/api.php?amount=${amount_of_question}`;
 
   if (question_category) {
@@ -64,22 +66,20 @@ const Questions = () => {
 
   if (loading) {
     return (
-      <Box mt={20}>
+      <div>
         <CircularProgress />
-      </Box>
+      </div>
     );
   }
-
 
   const handleTimerEnd = () => {
     setTimerExpired(true);
   };
-  const updateTotalTimeUsed = (time) => {
-    setTotalTimeUsed(prevTime => prevTime + time);
-    dispatch(handleTotalTimeChange(totalTimeUsed));
-    //console.log(totalTimeUsed, timeUsed);
-  };
 
+  const updateTotalTimeUsed = (time) => {
+    setTotalTimeUsed((prevTime) => prevTime + time);
+    dispatch(handleTotalTimeChange(totalTimeUsed));
+  };
 
   const handleClickAnswer = (e) => {
     const question = response.results[questionIndex];
@@ -95,7 +95,6 @@ const Questions = () => {
     } else {
       navigate("/score");
     }
-
   };
 
   // Shuffle array function
@@ -103,7 +102,10 @@ const Questions = () => {
     const shuffledArray = [...array];
     for (let i = shuffledArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ];
     }
     return shuffledArray;
   };
@@ -133,17 +135,21 @@ const Questions = () => {
     navigate("/settings"); // Use navigate to go back to the home route ("/")
   };
 
-  if((response?.results.length) === 0){
+  const renderNoQuestions = () => {
     return (
-      <div className={styles.questionContainer} >
-      <Typography variant="h5" fontWeight="bold" mb={3}>
-        Limited Questions only! {/* Display the final score */}
-      </Typography>
-      <Button onClick={handleBackToSettings} variant="outlined">
-        Back to settings! {/* Display a button to navigate back to settings */}
-      </Button>
-    </div>
-    )
+      <div className={styles.questionContainer}>
+        <Typography variant="h5" fontWeight="bold" mb={3}>
+          Limited Questions only! {/* Display the final score */}
+        </Typography>
+        <Button onClick={handleBackToSettings} variant="outlined">
+          Back to settings! {/* Display a button to navigate back to settings */}
+        </Button>
+      </div>
+    );
+  };
+
+  if (response?.results.length === 0) {
+    return renderNoQuestions();
   } else {
     return (
       <div className={styles.questionCard}>
@@ -210,5 +216,4 @@ const Questions = () => {
     );
   }
 };
-
 export default Questions;

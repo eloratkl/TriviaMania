@@ -8,7 +8,6 @@ import {
 } from "../redux/actions/quizActions";
 import styles from "./FinalScreen.module.css"; // Import the CSS module
 
-
 const FinalScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,9 +36,7 @@ const FinalScreen = () => {
         {scorePercentage >= 75 ? "Way to go!" : "Better Luck Next Time"}
       </div>
       <div className={styles.card}>
-        <div className={styles.cardHeader}>
-          Your Score
-        </div>
+        <div className={styles.cardHeader}>Your Score</div>
         <div className={styles.score} style={{ color: scoreColor }}>
           {score} / {amount_of_question}
         </div>
