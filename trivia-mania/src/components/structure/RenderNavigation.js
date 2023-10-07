@@ -85,7 +85,7 @@ export const RenderMenu = () => {
         <div className={styles.navbar_right}>
           {user.isAuthenticated ? (
             <li className={styles.menuItem} onClick={logout}>
-              Logout
+              <Link to="/">Logout</Link>
             </li>
           ) : (
             <li className={styles.menuItem}>

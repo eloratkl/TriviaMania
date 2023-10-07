@@ -1,4 +1,4 @@
-ul {
+nav ul {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -27,7 +27,7 @@ li.menuItem a:hover {
 
 .navbar_left {
     width: calc(100% / 3);
-    flex: 1;
+    /* flex: 1; */
     display: flex;
     gap: 25px;
     padding-left: 0;
@@ -35,9 +35,9 @@ li.menuItem a:hover {
     /* Adjust the gap between menu items as needed */
 }
 
-.navbar_left a {
+/* .navbar_left a {
     flex: 1;
-}
+} */
 
 .navbar_right {
     display: flex;
@@ -107,7 +107,7 @@ button.hamburger {
 
     }
 
-    ul,
+    nav ul,
     .navbar_left,
     .navbar_right {
         flex-flow: column wrap;
@@ -115,7 +115,7 @@ button.hamburger {
     }
 
     
-    ul {
+    nav ul {
         height: auto;
         position: absolute;
         top: 100px;
@@ -128,21 +128,21 @@ button.hamburger {
         filter: drop-shadow(0px 6px 6px #0163E8);
         display:none;
     }
-    ul.expanded {
+    nav ul.expanded {
         display: flex;
     }
 
-    ul li.menuItem {
+    nav ul li.menuItem {
         
         text-align: center;
         margin: 0;
         width: 100%;
     }
-    ul li.menuItem:hover {
+    nav ul li.menuItem:hover {
     background-color: #236ED1;
     }
 
-    ul li a {
+    nav ul li a {
         width: 100%;
         display: block;
         padding: 20px 0;

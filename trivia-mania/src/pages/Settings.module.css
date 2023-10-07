@@ -1,11 +1,5 @@
-.settings-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center horizontally */
-  justify-content: center; /* Center vertically */
-  min-width: min-content;
-  min-height: min-content; /* Set a minimum height to take up at least the full viewport height */
-  text-align: center; /* Center text within its container */
+.settingsContainer {
+  padding-bottom: 20px;
 }
 
 .settings-button {

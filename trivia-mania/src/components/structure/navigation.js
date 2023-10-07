@@ -38,13 +38,13 @@ export const nav = [
     isMenu: false,
     isPrivate: false,
   },
-  {
-    path: "/private",
-    name: "Private",
-    element: <Private />,
-    isMenu: true,
-    isPrivate: true,
-  },
+  // {
+  //   path: "/private",
+  //   name: "Private",
+  //   element: <Private />,
+  //   isMenu: false,
+  //   isPrivate: true,
+  // },
   {
     path: "/account",
     name: "Account",
