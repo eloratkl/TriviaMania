@@ -3,7 +3,6 @@ import React, { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthData } from "../auth/AuthWrapper";
 import styles from "./Login.module.css";
-import ButtonLightBG from "../components/structure/ButtonLightBG";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -76,14 +75,12 @@ export const Login = () => {
           />
         </div>
 
-        <ButtonLightBG onClick={handleLoginSubmit} buttonText={"Log In"} />
+        <button className={styles.button_light} type="button" onClick={handleLoginSubmit}>
+          Log In
+        </button>
         <p className={styles.info}>
           Don’t have an account? <Link to="/register">Sign up</Link> instead!
         </p>
-
-        {/* <button type="button" onClick={handleLoginSubmit}>
-          Log In
-        </button> */}
         {error && <p>{error}</p>}
       </form>
     </div>
