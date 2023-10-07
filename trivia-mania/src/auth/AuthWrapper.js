@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { RenderHeader } from "../components/structure/Header";
+// import { RenderHeader } from "../components/structure/Header";
 import {
   RenderMenu,
   RenderRoutes,
@@ -71,7 +71,7 @@ export const AuthWrapper = () => {
       }}
     >
       <>
-        <RenderHeader />
+        {/* <RenderHeader /> */}
         <RenderMenu />
         <RenderRoutes />
       </>
