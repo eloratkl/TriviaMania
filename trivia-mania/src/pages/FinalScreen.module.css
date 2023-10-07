@@ -1,0 +1,69 @@
+.finalScreenContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  background-color: #3189FF;
+}
+
+.header {
+  font-size: 36px;
+  color: #fff;
+  font-family: Poppins;
+}
+
+.card {
+  width: 557px;
+  height: 352px;
+  flex-shrink: 0;
+  border-radius: 40px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+  font-family: Poppins;
+  font-size: 36px;
+  font-weight: bold;
+  color: #331646;
+}
+
+.score {
+  font-family: Poppins;
+  font-size: 96px;
+  font-weight: 700;
+  color: #31cd63;
+  margin-top: 20px;
+}
+
+.totalTime {
+  font-family: Poppins;
+  width: 605px;
+  height: 36px;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  color: #331646;
+  margin-top: 20px;
+}
+
+.settingsButton {
+  display: flex;
+  width: 294px;
+  height: 64px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 30px;
+  background: linear-gradient(0deg, rgba(150, 68, 198, 1) 35%, rgba(142, 242, 255, 1) 100%);
+  color: #fff;
+  font-family: Poppins;
+  font-size: 20px; /* Adjust font size as needed */
+  font-weight: 600;
+  line-height: normal;
+}

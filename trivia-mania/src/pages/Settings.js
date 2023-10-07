@@ -1,9 +1,12 @@
-import { Button, CircularProgress, Typography } from "@mui/material";
+import { CircularProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import SelectField from "../components/SelectField";
 import TextFieldComp from "../components/TextFieldComp";
 import useAxios from "../hooks/useAxios";
+import styles from "./Settings.module.css";
+
+import Card from "../components/structure/Card";
 
 const Settings = () => {
   const { response, error, loading } = useAxios({ url: "/api_category.php" });
@@ -42,17 +45,40 @@ const Settings = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <SelectField options={response.trivia_categories} label="Category" />
-      <SelectField options={difficultyOptions} label="Difficulty" />
-      <SelectField options={typeOptions} label="Type" />
-      <TextFieldComp />
-      <Box mt={3} width="100%">
-        <Button fullWidth variant="contained" type="submit">
-          Get Started
-        </Button>
-      </Box>
-    </form>
+    <Card>
+      <h2>Quiz Settings ⚙️</h2>
+      <form onSubmit={handleSubmit}>
+        <div className={styles.settingsContainer}>
+          <SelectField
+            fullWidth
+            variant="contained"
+            options={response.trivia_categories}
+            label="Category"
+          />
+          <SelectField
+            fullWidth
+            variant="contained"
+            options={difficultyOptions}
+            label="Difficulty"
+          />
+          <SelectField
+            fullWidth
+            variant="contained"
+            options={typeOptions}
+            label="Type"
+          />
+          <TextFieldComp />
+        </div>
+        <button
+          fullWidth
+          variant="contained"
+          type="submit"
+          className="buttonLight"
+        >
+          Start!
+        </button>
+      </form>
+    </Card>
   );
 };
 

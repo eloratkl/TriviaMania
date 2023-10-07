@@ -9,8 +9,8 @@ import { AuthWrapper, AuthData } from "./auth/AuthWrapper";
 import { Container, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.js";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/js/bootstrap.js";
 
 function App() {
   return (
@@ -46,4 +46,3 @@ function PrivateRoute({ element, ...rest }) {
 }
 
 export default App;
-
