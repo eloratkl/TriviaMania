@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -13,7 +12,11 @@ import styles from "./FinalScreen.module.css"; // Import the CSS module
 const FinalScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { score, amount_of_question, timeUsed} = useSelector((state) => state);
+  const { score, amount_of_question, timeUsed } = useSelector((state) => state);
+
+  // Convert timeUsed from seconds to minutes and seconds
+  const minutes = Math.floor(timeUsed / 60);
+  const seconds = timeUsed % 60;
 
   const handleBackToSettings = () => {
     dispatch(handleScoreChange(0));
@@ -23,7 +26,7 @@ const FinalScreen = () => {
   };
 
   return (
-    <Box className={styles.finalScreenContainer}>
+    <div className={styles.finalScreenContainer}>
       <div className={styles.header}>
         Way to go!
       </div>
@@ -35,9 +38,10 @@ const FinalScreen = () => {
         {score} / {amount_of_question}
         </div>
         <div className={styles.totalTime}>
-       
+
           {/* Total Time: --:-- */}
-          Total Time Used: {timeUsed + 1} seconds
+          Total Time: {minutes.toString().padStart(2, "0")}:
+          {seconds.toString().padStart(2, "0")} min
         </div>
       </div>
       <button
@@ -47,7 +51,7 @@ const FinalScreen = () => {
       >
         Back to Settings
       </button>
-    </Box>
+    </div>
   );
 };
 

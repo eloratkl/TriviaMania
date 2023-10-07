@@ -6,6 +6,9 @@ import {
   CHANGE_SCORE,
   CHANGE_TYPE,
   CHANGE_TOTALTIME,
+  SET_GAME_PAUSED,
+  RESUME_GAME,
+  QUIT_GAME,
 } from "./quizActionTypes";
 
 
@@ -43,4 +46,22 @@ export const handleScoreChange = (payload) => ({
 export const handleTotalTimeChange = (payload) => ({
   type: CHANGE_TOTALTIME, // Assign the action type constant for score change
   payload, // Assign the new score value as the payload
+});
+
+// Define an action creator for pausing the game
+export const setGamePaused = (isPaused) => {
+  return {
+    type: SET_GAME_PAUSED,
+    payload: isPaused,
+  };
+};
+
+// Define an action creator for resuming the game
+export const handleResumeGameAction = () => ({
+  type: RESUME_GAME,
+});
+
+// Define an action creator for quitting the game
+export const handleQuitGameAction = () => ({
+  type: QUIT_GAME,
 });
