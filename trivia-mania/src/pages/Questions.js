@@ -56,17 +56,17 @@ const Questions = () => {
     );
   }
 
-  
+
   const handleTimerEnd = () => {
     setTimerExpired(true);
   };
   const updateTotalTimeUsed = (time) => {
-    setTotalTimeUsed(prevTime => prevTime + time); 
+    setTotalTimeUsed(prevTime => prevTime + time);
     dispatch(handleTotalTimeChange(totalTimeUsed));
     //console.log(totalTimeUsed, timeUsed);
   };
 
-  
+
   const handleClickAnswer = (e) => {
     const question = response.results[questionIndex];
     const selectedAnswer = e.target.textContent;
@@ -99,26 +99,26 @@ const Questions = () => {
   };
 
   if((response?.results.length) === 0){
-    return ( 
-      <Box mt={30}>
+    return (
+      <div className={styles.questionContainer} >
       <Typography variant="h5" fontWeight="bold" mb={3}>
         Limited Questions only! {/* Display the final score */}
       </Typography>
       <Button onClick={handleBackToSettings} variant="outlined">
         Back to settings! {/* Display a button to navigate back to settings */}
       </Button>
-    </Box>
+    </div>
     )
   }else{
     if(timerExpired === false){
       return (
-        <Box className={styles.questionContainer}>
+        <div className={styles.questionContainer}>
           {timerExpired ? (
             <div>Time's up!</div>
           ) : (
             <CountdownTimer initialTime={amount_of_question * seconds} onTimerEnd={handleTimerEnd} updateTimeUsed={updateTotalTimeUsed} />
           )}
-    
+
           <Typography className={styles.questionText}>
             Question:{questionIndex +1}
           </Typography>
@@ -141,14 +141,14 @@ const Questions = () => {
             {/* Score: {score} / {response.results.length} */}
             Score: {score} / {amount_of_question}
           </Typography>
-    
-        </Box>
-        
-      );    
+
+        </div>
+
+      );
     }else{
 
       navigate("/score");
-      
+
     }
         }
 };
