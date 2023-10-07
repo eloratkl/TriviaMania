@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
-import { handleScoreChange } from "../redux/actions/quizActions";
+import { handleScoreChange, handleTotalTimeChange } from "../redux/actions/quizActions";
 import styles from "./Questions.module.css";
+import CountdownTimer from "../components/Timer";
 
 
 const Questions = () => {
@@ -15,11 +16,13 @@ const Questions = () => {
     question_difficulty,
     question_type,
     amount_of_question,
-    score,
+    score = 0,
   } = useSelector((state) => state);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [timerExpired, setTimerExpired] = useState(false);
+  const [totalTimeUsed, setTotalTimeUsed] = useState(0);
+  let seconds = 10;
   let apiUrl = `/api.php?amount=${amount_of_question}`;
 
   if (question_category) {
@@ -53,6 +56,17 @@ const Questions = () => {
     );
   }
 
+  
+  const handleTimerEnd = () => {
+    setTimerExpired(true);
+  };
+  const updateTotalTimeUsed = (time) => {
+    setTotalTimeUsed(prevTime => prevTime + time); 
+    dispatch(handleTotalTimeChange(totalTimeUsed));
+    //console.log(totalTimeUsed, timeUsed);
+  };
+
+  
   const handleClickAnswer = (e) => {
     const question = response.results[questionIndex];
     const selectedAnswer = e.target.textContent;
@@ -67,6 +81,7 @@ const Questions = () => {
     } else {
       navigate("/score");
     }
+
   };
 
   // Shuffle array function
@@ -80,7 +95,7 @@ const Questions = () => {
   };
 
   const handleBackToSettings = () => {
-    navigate("/"); // Use navigate to go back to the home route ("/")
+    navigate("/settings"); // Use navigate to go back to the home route ("/")
   };
 
   if((response?.results.length) === 0){
@@ -95,34 +110,46 @@ const Questions = () => {
     </Box>
     )
   }else{
+    if(timerExpired === false){
+      return (
+        <Box className={styles.questionContainer}>
+          {timerExpired ? (
+            <div>Time's up!</div>
+          ) : (
+            <CountdownTimer initialTime={amount_of_question * seconds} onTimerEnd={handleTimerEnd} updateTimeUsed={updateTotalTimeUsed} />
+          )}
+    
+          <Typography className={styles.questionText}>
+            Question:{questionIndex +1}
+          </Typography>
+          <Typography className={styles.questionText}>
+            {decode(response.results[questionIndex].question)}
+          </Typography>
+          <div className={styles.answerOptions}>
+            {options.map((data, id) => (
+              <Button
+                key={id}
+                onClick={handleClickAnswer}
+                variant="contained"
+                className={styles.answerButton}
+              >
+                {decode(data)}
+              </Button>
+            ))}
+          </div>
+          <Typography mt={5}>
+            {/* Score: {score} / {response.results.length} */}
+            Score: {score} / {amount_of_question}
+          </Typography>
+    
+        </Box>
+        
+      );    
+    }else{
 
-  return (
-    <Box className={styles.questionContainer}>
-
-      <Typography className={styles.questionText}>
-        Question:{questionIndex +1}
-      </Typography>
-      <Typography className={styles.questionText}>
-        {decode(response.results[questionIndex].question)}
-      </Typography>
-      <div className={styles.answerOptions}>
-        {options.map((data, id) => (
-          <Button
-            key={id}
-            onClick={handleClickAnswer}
-            variant="contained"
-            className={styles.answerButton}
-          >
-            {decode(data)}
-          </Button>
-        ))}
-      </div>
-      <Typography mt={5}>
-        {/* Score: {score} / {response.results.length} */}
-        Score: {score} / {amount_of_question}
-      </Typography>
-    </Box>
-  );
+      navigate("/score");
+      
+    }
         }
 };
 

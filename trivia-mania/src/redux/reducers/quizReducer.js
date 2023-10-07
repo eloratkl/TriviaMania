@@ -4,6 +4,7 @@ import {
   CHANGE_DIFFICULTY,
   CHANGE_SCORE,
   CHANGE_TYPE,
+  CHANGE_TOTALTIME,
 } from "../actions/quizActionTypes";
 
 // Define initial state for both leaderboard and quiz settings
@@ -13,6 +14,7 @@ const initialState = {
   question_type: "",      // Initialize the question type with an empty string
   amount_of_question: 50, // Initialize the number of questions with 50
   score: 0,               // Initialize the user's score with 0
+  timeUsed:0,
 };
 
 // Reducer function that handles quiz settings
@@ -45,7 +47,11 @@ const quizReducer = (state = initialState, action) => {
         ...state,
         score: action.payload,
       };
-
+      case CHANGE_TOTALTIME:
+        return {
+          ...state,
+          timeUsed: action.payload,
+        };
     // If the action type is not recognized, return the current state unchanged
     default:
       return state;

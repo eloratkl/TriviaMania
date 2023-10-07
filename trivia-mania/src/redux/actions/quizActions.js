@@ -5,6 +5,7 @@ import {
   CHANGE_DIFFICULTY,
   CHANGE_SCORE,
   CHANGE_TYPE,
+  CHANGE_TOTALTIME,
 } from "./quizActionTypes";
 
 
@@ -35,5 +36,11 @@ export const handleAmountChange = (payload) => ({
 // Define an action creator for changing the user's score
 export const handleScoreChange = (payload) => ({
   type: CHANGE_SCORE, // Assign the action type constant for score change
+  payload, // Assign the new score value as the payload
+});
+
+// Define an action creator for changing the user's score
+export const handleTotalTimeChange = (payload) => ({
+  type: CHANGE_TOTALTIME, // Assign the action type constant for score change
   payload, // Assign the new score value as the payload
 });
