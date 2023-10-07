@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-
 const CountdownTimer = ({ initialTime, onTimerEnd, updateTimeUsed }) => {
   const [totalSeconds, setTotalSeconds] = useState(initialTime);
   const [minutes, setMinutes] = useState(Math.floor(initialTime / 60));
@@ -31,3 +30,4 @@ const CountdownTimer = ({ initialTime, onTimerEnd, updateTimeUsed }) => {
 };
 
 export default CountdownTimer;
+
