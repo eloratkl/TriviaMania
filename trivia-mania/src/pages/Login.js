@@ -78,13 +78,18 @@ export const Login = () => {
           />
         </div>
 
-        <button className="buttonLight" type="button" onClick={handleLoginSubmit}>
+        {error && <p className={ styles.loginError}>{error}</p>}
+
+        <button
+          className="buttonLight"
+          type="button"
+          onClick={handleLoginSubmit}
+        >
           Log In
         </button>
         <p className={styles.info}>
           Don’t have an account? <Link to="/register">Sign up</Link> instead!
         </p>
-        {error && <p>{error}</p>}
       </form>
     </Card>
   );
