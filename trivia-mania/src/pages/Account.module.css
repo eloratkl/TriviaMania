@@ -68,6 +68,21 @@ p.stat {
 
 }
 
+.accountLinksContainer ul {
+    padding-left: 0;
+}
+
+.accountLinksContainer ul li {
+    list-style: none;
+    font-size: 14px;
+    padding-top: 30px;
+   
+}
+.accountLinksContainer ul li a {
+    color: #696F79;
+}
+
+
 
 @media screen and (max-width: 1280px) { 
     .accountStatsContainer {

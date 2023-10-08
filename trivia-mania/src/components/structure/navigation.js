@@ -49,7 +49,7 @@ export const nav = [
     path: "/account",
     name: "Account",
     element: <Account />,
-    isMenu: true,
+    isMenu: false,
     isPrivate: true,
   },
   {

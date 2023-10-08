@@ -36,9 +36,15 @@ li.menuItem a:hover {
 
 .navbar_right {
     display: flex;
-    width: calc(100% / 3);
+    /* width: calc(100% / 3); */
     justify-content: flex-end;
     padding-left:0;
+    gap: 10px;
+}
+
+.navbar_right span {
+    font-weight: 600;
+    color: #fff;
 }
 
 /* Style the "Logout" link differently if needed */
@@ -145,6 +151,10 @@ button.hamburger {
 
     .navbar_left {
         gap: 0;
+    }
+
+    .navbar_right span {
+        display: none;
     }
 
 

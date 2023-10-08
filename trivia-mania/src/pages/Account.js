@@ -7,7 +7,7 @@ import profileImage from "../assets/catprofile.jpg";
 import Card from "../components/structure/Card";
 
 export const Account = () => {
-  const { user } = AuthData();
+  const { user, logout } = AuthData();
 
   return (
     <Card>
@@ -68,6 +68,12 @@ export const Account = () => {
         <button className="buttonMisc">
           <Link to="/settings">Quiz Settings</Link>
         </button>
+
+        <ul>
+          <li className={styles.menuItem} onClick={logout}>
+            <Link to="/">Logout</Link>
+          </li>
+        </ul>
       </div>
     </Card>
   );
