@@ -27,7 +27,7 @@ li.menuItem a:hover {
 
 .navbar_left {
     width: calc(100% / 3);
-    /* flex: 1; */
+    flex: 1;
     display: flex;
     gap: 25px;
     padding-left: 0;
@@ -35,9 +35,9 @@ li.menuItem a:hover {
     /* Adjust the gap between menu items as needed */
 }
 
-/* .navbar_left a {
+.navbar_left a {
     flex: 1;
-} */
+}
 
 .navbar_right {
     display: flex;
@@ -162,7 +162,7 @@ button.hamburger {
         background-color: blue; 
     }
 
-    .navblock.expanded ul {
+    .navblock.expanded nav ul {
             
             flex-direction: column;
             flex-wrap: wrap;

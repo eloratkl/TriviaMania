@@ -49,11 +49,11 @@ const FinalScreen = () => {
         </div>
       </div>
       <button
+        className="buttonLight"
         type="button"
         onClick={handleBackToSettings}
-        className={styles.settingsButton}
       >
-        Back to Settings
+        New Quiz
       </button>
     </div>
   );
