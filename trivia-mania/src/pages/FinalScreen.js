@@ -8,13 +8,17 @@ import {
 } from '../redux/actions/quizActions';
 import styles from './FinalScreen.module.css'; // Import the CSS module
 
+//import player date
 import { UpdatedLeaderBoard } from '../components/database';
 
 const FinalScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { score, amount_of_question, timeUsed } = useSelector((state) => state);
-  UpdatedLeaderBoard(score);
+
+  //Get player data
+  // UpdatedLeaderBoard(score);
+
   // Calculate the score percentage
   const scorePercentage = (score / amount_of_question) * 100;
 

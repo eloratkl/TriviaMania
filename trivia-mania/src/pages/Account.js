@@ -1,8 +1,7 @@
-import React from "react";
-import { AuthData } from "../auth/AuthWrapper";
+import React from 'react';
+import { AuthData } from '../auth/AuthWrapper';
 
-import Card from "../components/structure/Card";
-
+import Card from '../components/structure/Card';
 
 export const Account = () => {
   const { user } = AuthData();

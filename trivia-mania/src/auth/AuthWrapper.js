@@ -1,36 +1,41 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from 'react';
 // import { RenderHeader } from "../components/structure/Header";
 import {
   RenderMenu,
   RenderRoutes,
-} from "../components/structure/RenderNavigation";
+} from '../components/structure/RenderNavigation';
+//paste here
+import { UpdatedLeaderBoard } from '../components/database';
 
-import mockUsers from "../data/mockUsers";
+import mockUsers from '../data/mockUsers';
 
 const AuthContext = createContext();
 export const AuthData = () => useContext(AuthContext);
 
 export const AuthWrapper = () => {
-  const [user, setUser] = useState({ name: "", isAuthenticated: false });
+  const [user, setUser] = useState({ name: '', isAuthenticated: false });
   const [loginError, setLoginError] = useState(null);
   const [registrationError, setRegistrationError] = useState(null);
 
   const handleLogin = async (email, password) => {
     try {
       // Simulate user login in the mock API
-      const user = mockUsers.find((u) => u.email === email && u.password === password);
+      const user = mockUsers.find(
+        (u) => u.email === email && u.password === password
+      );
       if (user) {
+        UpdatedLeaderBoard(user.name);
         setUser({ name: user.name, isAuthenticated: true });
         setLoginError(null);
         return true;
       } else {
-        setUser({ name: "", isAuthenticated: false });
-        setLoginError("Login failed. Invalid email or password.");
+        setUser({ name: '', isAuthenticated: false });
+        setLoginError('Login failed. Invalid email or password.');
         return false;
       }
     } catch (error) {
-      setUser({ name: "", isAuthenticated: false });
-      setLoginError("An error occurred during login. Please try again.");
+      setUser({ name: '', isAuthenticated: false });
+      setLoginError('An error occurred during login. Please try again.');
       return false;
     }
   };
@@ -49,14 +54,16 @@ export const AuthWrapper = () => {
       setRegistrationError(null);
       return true;
     } catch (error) {
-      setUser({ name: "", isAuthenticated: false });
-      setRegistrationError("An error occurred during registration. Please try again.");
+      setUser({ name: '', isAuthenticated: false });
+      setRegistrationError(
+        'An error occurred during registration. Please try again.'
+      );
       return false;
     }
   };
 
   const logout = () => {
-    setUser({ name: "", isAuthenticated: false });
+    setUser({ name: '', isAuthenticated: false });
   };
 
   return (

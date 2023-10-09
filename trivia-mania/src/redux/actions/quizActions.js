@@ -9,8 +9,7 @@ import {
   SET_GAME_PAUSED,
   RESUME_GAME,
   QUIT_GAME,
-} from "./quizActionTypes";
-
+} from './quizActionTypes';
 
 // Define an action creator for changing the category
 export const handleCategoryChange = (payload) => ({
