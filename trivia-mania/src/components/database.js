@@ -27,7 +27,7 @@ export let Leaderboard = [
     location: 'Japan',
     score: 18,
     img: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-    dt: '2023-09-03',
+    dt: '2023-10-09',
   },
   {
     name: 'C Connell',
@@ -61,7 +61,7 @@ export const UpdatedLeaderBoard = (score) => {
       location: 'Singapore',
       score: score,
       img: 'https://cdn.aaihs.org/2017/08/v006q4ynkmbxcdfqo7fj-1024x576.jpg',
-      dt: '2023-10-02',
+      dt: '2023-10-09',
     };
 
     Leaderboard.push(newPlayer);
