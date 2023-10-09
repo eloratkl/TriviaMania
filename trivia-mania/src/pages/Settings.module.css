@@ -1,0 +1,9 @@
+.settingsContainer {
+  padding-bottom: 20px;
+}
+
+.settings-button {
+  background: linear-gradient(0deg, rgba(150, 68, 198, 1) 35%, rgba(142, 242, 255, 1) 100%);
+  color: white;
+  font-weight: bold;
+}

@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "trivia-mania",
   "version": "0.1.0",
   "private": true,
@@ -59,10 +58,5 @@
   },
   "devDependencies": {
     "redux-devtools-extension": "^2.13.9"
-=======
-  "dependencies": {
-    "bootstrap": "^5.3.2",
-    "react-bootstrap": "^2.9.0"
->>>>>>> 57eb5730f3f6b1613ce5441ed5ff6b091648224b
   }
 }
