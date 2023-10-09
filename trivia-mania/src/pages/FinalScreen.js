@@ -17,7 +17,7 @@ const FinalScreen = () => {
   const { score, amount_of_question, timeUsed } = useSelector((state) => state);
 
   //Get player data
-  // UpdatedLeaderBoard(score);
+  UpdatedLeaderBoard(score);
 
   // Calculate the score percentage
   const scorePercentage = (score / amount_of_question) * 100;

@@ -1,4 +1,4 @@
-// const PlayerName = 'banana';
+import mockUsers from '../data/mockUsers';
 
 export let Leaderboard = [
   {
@@ -45,41 +45,11 @@ export let Leaderboard = [
   },
 ];
 
-// export const UpdatedLeaderBoard = (score) => {
-//   const newPlayer = {
-//     name: PlayerName,
-//     location: 'Singapore',
-//     score: score,
-//     img: 'https://cdn.aaihs.org/2017/08/v006q4ynkmbxcdfqo7fj-1024x576.jpg',
-//     dt: '2023-10-02',
-//   };
-//   Leaderboard = [...Leaderboard, newPlayer];
-// };
-
-// export const UpdatedLeaderBoard = (name, score) => {
-//   // Check if the player already exists in the leaderboard
-//   const playerIndex = Leaderboard.findIndex((player) => player.name === name);
-
-//   if (playerIndex !== -1) {
-//     // Player exists, update their score
-//     Leaderboard[playerIndex].score = score;
-//   } else {
-//     // Player doesn't exist, add a new entry
-//     const newPlayer = {
-//       name: name,
-//       location: 'Wakanda',
-//       score: score,
-//       img: 'https://cdn.aaihs.org/2017/08/v006q4ynkmbxcdfqo7fj-1024x576.jpg',
-//       dt: '2023-10-02',
-//     };
-
-//     Leaderboard.push(newPlayer);
-//   }
-// };
-
-export const UpdatedLeaderBoard = (name, score = 21) => {
+export const UpdatedLeaderBoard = (score) => {
   // Check if the player already exists in the leaderboard
-  const playerIndex = Leaderboard.findIndex((player) => player.name === name);
+  const playerIndex = Leaderboard.findIndex(
+    (player) => player.name === mockUsers[0].name
+  );
 
   if (playerIndex !== -1) {
     // Player exists, update their score
@@ -87,8 +57,8 @@ export const UpdatedLeaderBoard = (name, score = 21) => {
   } else {
     // Player doesn't exist, add a new entry
     const newPlayer = {
-      name: name,
-      location: 'Wakanda',
+      name: mockUsers[0].name,
+      location: 'Singapore',
       score: score,
       img: 'https://cdn.aaihs.org/2017/08/v006q4ynkmbxcdfqo7fj-1024x576.jpg',
       dt: '2023-10-02',

@@ -4,8 +4,6 @@ import {
   RenderMenu,
   RenderRoutes,
 } from '../components/structure/RenderNavigation';
-//paste here
-import { UpdatedLeaderBoard } from '../components/database';
 
 import mockUsers from '../data/mockUsers';
 
@@ -24,7 +22,6 @@ export const AuthWrapper = () => {
         (u) => u.email === email && u.password === password
       );
       if (user) {
-        UpdatedLeaderBoard(user.name);
         setUser({ name: user.name, isAuthenticated: true });
         setLoginError(null);
         return true;
