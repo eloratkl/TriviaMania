@@ -1,4 +1,4 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { AuthData } from "../../auth/AuthWrapper";
 import { nav } from "./navigation";
 import logoLong from "../../assets/logoLong.png";
@@ -25,6 +25,10 @@ export const RenderRoutes = () => {
 export const RenderMenu = () => {
   const [navIsExpanded, setNavIsExpanded] = useState(false);
   const { user } = AuthData();
+
+    // Check if the current page is the homepage ("/")
+  const location = useLocation();
+  const isHomepage = location.pathname === "/";
 
   const MenuItem = ({ r }) => {
     return (
@@ -62,7 +66,10 @@ export const RenderMenu = () => {
         </svg>
       </button>
 
-      <div className={styles.logo}>
+      <div
+        className={styles.logo}
+        style={{ display: isHomepage ? "none" : "block" }}
+      >
         <Link to="/">
           <img src={logoLong} alt="Trivia Mania Logo" />
         </Link>

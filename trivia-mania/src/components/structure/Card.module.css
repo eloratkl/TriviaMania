@@ -10,11 +10,14 @@
 }
 
 .cardChild {
-    background-color: #fff;
-    border-radius: 30px;
-    padding: 50px;
-    filter: drop-shadow(0px 5px 8px rgba(1, 99, 232, 0.7));
-    min-width: 500px;
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 50px;
+  filter: drop-shadow(0px 5px 8px rgba(1, 99, 232, 0.7));
+  min-width: 500px;
+
+  margin: 5%;
+  max-width: 1080px;
 }
 
 

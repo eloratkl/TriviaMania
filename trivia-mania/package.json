@@ -19,6 +19,7 @@
     "react": "^18.2.0",
     "react-auth-kit": "^2.12.7",
     "react-bootstrap-sweetalert": "^5.2.0",
+    "react-confetti": "^6.1.0",
     "react-dom": "^18.2.0",
     "react-native-base64": "^0.2.1",
     "react-query": "^3.39.3",

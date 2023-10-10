@@ -9,6 +9,8 @@ import { Login } from '../../pages/Login';
 import { Register } from '../../pages/Register';
 // import { Private } from "../../pages/Private";
 
+import { QuizStart } from "../../pages/QuizStart";
+
 export const nav = [
   {
     path: '/',
@@ -58,6 +60,13 @@ export const nav = [
     element: <Settings />,
     isMenu: true,
     isPrivate: true,
+  },
+  {
+    path: "/quizstart",
+    name: "QuizStart",
+    element: <QuizStart />,
+    isMenu: false,
+    isPrivate: false,
   },
   {
     path: '/questions',
