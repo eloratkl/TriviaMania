@@ -24,7 +24,7 @@ export const RenderRoutes = () => {
 
 export const RenderMenu = () => {
   const [navIsExpanded, setNavIsExpanded] = useState(false);
-  const { user, logout } = AuthData();
+  const { user } = AuthData();
 
   const MenuItem = ({ r }) => {
     return (
