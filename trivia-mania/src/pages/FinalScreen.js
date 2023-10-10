@@ -5,11 +5,11 @@ import {
   handleAmountChange,
   handleScoreChange,
   handleTotalTimeChange,
-} from '../redux/actions/quizActions';
-import styles from './FinalScreen.module.css'; // Import the CSS module
-
-//import player date
+} from "../redux/actions/quizActions";
+import styles from "./FinalScreen.module.css"; // Import the CSS module
 import { UpdatedLeaderBoard } from '../components/database';
+import congrats from '../assets/congrats.gif'
+
 
 const FinalScreen = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const FinalScreen = () => {
 
   //Get player data
   UpdatedLeaderBoard(score);
-
+  
   // Calculate the score percentage
   const scorePercentage = (score / amount_of_question) * 100;
 
@@ -38,8 +38,12 @@ const FinalScreen = () => {
 
   return (
     <div className={styles.finalScreenContainer}>
+      <div className={styles.gifContainer}>
+      {scorePercentage >= 75 && <img src={congrats} alt="Wishes"  className={styles.gifimage}/>}
+      {scorePercentage < 75 && <img src="https://media.giphy.com/media/5uWKpbduvm99E5f82v/giphy.gif" alt="Wishes"  className={styles.gifimage}/>}
+      </div>
       <div className={styles.header}>
-        {scorePercentage >= 75 ? 'Way to go!' : 'Better Luck Next Time'}
+        {scorePercentage >= 75 ? "Way to go!" : "Better Luck Next Time"}
       </div>
       <div className={styles.card}>
         <div className={styles.cardHeader}>Your Score</div>

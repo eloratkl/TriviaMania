@@ -1,7 +1,9 @@
 /* Define CSS classes for styling */
 .questionCard {
-  width: 1554px;
-  height: 827px;
+  /* width: 1554px;
+  height: 827px; */
+  width: auto;
+  height: auto; 
   border-radius: 40px;
   background: #277BED;
   padding: 32px;
