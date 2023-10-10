@@ -19,6 +19,7 @@ import {
   handleQuitGameAction,
 } from "../redux/actions/quizActions";
 import styles from "./Questions.module.css";
+import Card from "../components/structure/Card";
 import CountdownTimer from "../components/Timer";
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline"; // Import the PauseCircleOutline icon
 
@@ -137,14 +138,17 @@ const Questions = () => {
 
   const renderNoQuestions = () => {
     return (
-      <div className={styles.questionContainer}>
-        <Typography variant="h5" fontWeight="bold" mb={3}>
-          Limited Questions only! {/* Display the final score */}
-        </Typography>
-        <Button onClick={handleBackToSettings} variant="outlined">
-          Back to settings! {/* Display a button to navigate back to settings */}
-        </Button>
-      </div>
+      <Card>
+        <div className={styles.questionContainer}>
+          <Typography variant="h5" fontWeight="bold" mb={3}>
+            Limited Questions only! {/* Display the final score */}
+          </Typography>
+          <button onClick={handleBackToSettings} className="buttonLight">
+            Back to settings!{" "}
+            {/* Display a button to navigate back to settings */}
+          </button>
+        </div>
+      </Card>
     );
   };
 
@@ -159,8 +163,7 @@ const Questions = () => {
           color="primary"
           className={styles.pauseButton}
           startIcon={<PauseCircleOutlineIcon />}
-        >
-        </Button>
+        ></Button>
         <div className={styles.questionIndex}>
           Question: {questionIndex + 1}
         </div>
@@ -191,13 +194,19 @@ const Questions = () => {
           Score: {score} / {amount_of_question}
         </div>
         {!timerExpired && (
-          <Button onClick={handleBackToSettings} variant="contained" color="info">
+          <Button
+            onClick={handleBackToSettings}
+            variant="contained"
+            color="info"
+          >
             Back to settings!
           </Button>
         )}
         <Dialog open={showPopup}>
           <DialogTitle>
-            <Typography variant="h6" align="center">Game Paused</Typography>
+            <Typography variant="h6" align="center">
+              Game Paused
+            </Typography>
           </DialogTitle>
           <DialogActions>
             <Button

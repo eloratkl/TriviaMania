@@ -3,7 +3,6 @@ import React from "react";
 import { AuthData } from "../auth/AuthWrapper";
 import styles from "./Account.module.css"; // Import the CSS module
 import profileImage from "../assets/catprofile.jpg";
-
 import Card from "../components/structure/Card";
 
 export const Account = () => {
