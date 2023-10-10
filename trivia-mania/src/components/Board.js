@@ -21,7 +21,7 @@ export default function Board({ period }) {
         break;
     }
 
-    const filter = Leaderboard.filter(val => {
+    const filter = Leaderboard.filter((val) => {
       const userDate = new Date(val.dt);
       return previous <= userDate && today >= userDate;
     });
@@ -33,11 +33,11 @@ export default function Board({ period }) {
 
   return (
     <div className="board">
-      <h1 className='leaderboard'>Leaderboard</h1>
+      <h1 className="leaderboard">Leaderboard</h1>
 
       <div className="duration">
         <Profiles Leaderboard={filteredLeaderboard} period={period} />
       </div>
     </div>
-  )
+  );
 }
