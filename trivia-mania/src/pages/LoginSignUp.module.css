@@ -39,6 +39,13 @@
   color: #dadada;
 }
 
+.loginError {
+  padding-bottom: 20px;
+  margin-top: -20px;
+  color: red;
+  font-size: 14px;
+}
+
 p.info {
   font-size: 12px;
   color: #696F79;
@@ -60,3 +67,4 @@ p.info a:hover {
     padding: 0 10px;
   }
 }
+

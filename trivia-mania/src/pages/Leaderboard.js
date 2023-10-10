@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import {
-  Container,
-  Typography,
   Radio,
   RadioGroup,
   FormControlLabel,
 } from "@mui/material";
-import { Box } from "@mui/system";
+import Card from "../components/structure/Card";
 import Board from "../components/Board";
 import "../components/style.css";
 
@@ -17,12 +15,9 @@ const LeaderboardPage = () => {
     setPeriod(event.target.value);
   };
 
-  return (
-    <Container maxWidth="md"> {/* Use Container for styling */}
-      <Box>
-        <Typography variant="h2" fontWeight="bold">
-          Trivia Mania
-        </Typography>
+ return (
+    <Card>
+      <Board period={period} /> {/* Pass the selected period as a prop */}
         <RadioGroup
           name="period"
           value={period}
@@ -34,9 +29,7 @@ const LeaderboardPage = () => {
           <FormControlLabel value="30" control={<Radio />} label="30 Days" />
           <FormControlLabel value="all" control={<Radio />} label="All-Time" />
         </RadioGroup>
-        <Board period={period} /> {/* Pass the selected period as a prop */}
-      </Box>
-    </Container>
+    </Card>
   );
 };
 

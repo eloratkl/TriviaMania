@@ -1,5 +1,5 @@
 :root {
-  --gradient: linear-gradient(60deg, #141b2d, #6870fa, #141b2d);
+  --gradient: linear-gradient(0deg, #9644c6 0%, #8ef2ff 100%);
   --myGrey: #666666;
   --myBlue: #6870fa;
   --myDarkBlue: #141b2d;
@@ -25,7 +25,7 @@
 }
 
 .quiz-nav button, .results-container button{
-  font-family: var(--font-mono);
+  /* font-family: var(--font-mono); */
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
   border-radius: 0.5rem;
   margin: 5px;
@@ -86,22 +86,23 @@ h2 {
 
 /* Buttons */
 button.buttonLight,
-button.buttonDark {
+button.buttonDark,
+button.buttonMisc {
   padding: 15px 25px;
   border-radius: 40px;
   border: none;
   height: auto;
-  width: 150px;
+  min-width: 150px;
+  font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
   /* margin: 20px 0; */
 }
 
 /* For light background */
 .buttonLight {
   color: #fff;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
-  background: linear-gradient(0deg, rgba(150, 68, 198, 1) 0%, rgba(142, 242, 255, 1) 100%);
+  background: var(--gradient);
   filter: drop-shadow(0px 4px 4px rgba(150, 68, 198, 0.3));
   transition: var(--transition);
 }
@@ -116,15 +117,40 @@ button.buttonDark {
 
 /* For dark background */
 .buttonDark {
-  color: linear-gradient(0deg, rgba(150, 68, 198, 1) 0%, rgba(142, 242, 255, 1) 100%);
+  color: var(--gradient);
   background-color: #fff;
   filter: drop-shadow(0px 5px 8px #0163E8);
   transition: var(--transition);
 }
 
-.buttonDark:hover {
-  color: #f0f0f0;
-  background-color: grey
-    /*test*/
+/* White Button for non-CTAs */
 
+.buttonMisc {
+  background: #8EF2FF;
+  background: var(--gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-color: #fff;
+  box-shadow: 0px 5px 8px #dadada;
+  transition: var(--transition);
+  border: 1px solid #efefef !important;
+  width: 80%
 }
+
+
+.buttonDark:hover,
+.buttonMisc:hover {
+  background-color: #dadada;
+  filter: none;
+  margin-top: 3px;
+  margin-bottom: -3px;
+  color: var(--black-text);
+    /*test*/
+}
+.buttonMisc:hover {
+  box-shadow: none;
+}
+
+
+

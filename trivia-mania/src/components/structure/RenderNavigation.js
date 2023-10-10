@@ -24,7 +24,7 @@ export const RenderRoutes = () => {
 
 export const RenderMenu = () => {
   const [navIsExpanded, setNavIsExpanded] = useState(false);
-  const { user, logout } = AuthData();
+  const { user } = AuthData();
 
   const MenuItem = ({ r }) => {
     return (
@@ -72,8 +72,9 @@ export const RenderMenu = () => {
         <div className={styles.navbar_left}>
           {nav.map((r, i) => {
             if (
-              (!r.isPrivate && r.isMenu) ||
-              (r.path === "/register" && !user.isAuthenticated)
+              !r.isPrivate &&
+              r.isMenu
+              // || (r.path === "/register" && !user.isAuthenticated)
             ) {
               return <MenuItem key={i} r={r} />;
             } else if (user.isAuthenticated && r.isMenu) {
@@ -82,20 +83,26 @@ export const RenderMenu = () => {
           })}
         </div>
 
-        <div className={styles.navbar_right}>
+        <div>
           {user.isAuthenticated ? (
-            <li className={styles.menuItem} onClick={logout}>
-              <Link to="/">Logout</Link>
+            <li className={styles.menuItem}>
+              <Link to="/account">My Account</Link>
             </li>
           ) : (
-            <li className={styles.menuItem}>
-              <Link to="/login">Login</Link>
-            </li>
+            <div className={styles.navbar_right}>
+              <li className={styles.menuItem}>
+                <Link to="/login">Login</Link>
+              </li>
+              <span>&nbsp;|&nbsp;</span>
+              <li className={styles.menuItem}>
+                <Link to="/register">Sign Up</Link>
+              </li>
+            </div>
           )}
 
           {!user.isAuthenticated && !hasRegisterLink && (
             <li className={styles.menuItem}>
-              <Link to="/register">Register</Link>
+              <Link to="/register"> Register</Link>
             </li>
           )}
         </div>
