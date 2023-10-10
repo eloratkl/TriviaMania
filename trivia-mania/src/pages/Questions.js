@@ -170,12 +170,12 @@ const Questions = () => {
 
   const renderNoQuestions = () => {
     return (
-      <div className={styles.questionContainer}>
+      <div className={styles.questionCard}>
         <Typography variant="h5" fontWeight="bold" mb={3}>
           Limited Questions only! {/* Display the final score */}
         </Typography>
-        <Button onClick={handleBackToSettings} variant="outlined">
-          Back to settings! {/* Display a button to navigate back to settings */}
+        <Button onClick={handleBackToSettings} variant="contained" color="info">
+            Back to settings!
         </Button>
       </div>
     );

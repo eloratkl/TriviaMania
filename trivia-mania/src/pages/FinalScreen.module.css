@@ -51,3 +51,12 @@
   color: #331646;
   margin-top: 20px;
 }
+
+.gifContainer{
+  display: flex;
+  align-items: center;
+}
+.gifimage {
+  max-width: 200px; /* Adjust the width as needed */
+  margin-right: 20px; /* Add some spacing between the image and text */
+}
