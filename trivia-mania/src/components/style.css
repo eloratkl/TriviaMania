@@ -10,32 +10,6 @@
       height: 100vh;
 }
 
-.board {
-  text-align: center;
-}
-
-.board .leaderboard{
-  margin-bottom: 1em;
-}
-
-.board .duration{
-  display: flex;
-  justify-content: center;
-  gap: 1em;
-}
-
-.board .duration > button{
-  border: 1px solid var(--color-light);
-  padding: .5em 2em;
-  border-radius: 50px;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.board .duration > button:hover{
-  background-color: var(--color-dark);
-  color: var(--color-light);
-}
 
 .active{
   background-color: var(--color-dark);
@@ -46,48 +20,68 @@
   display: flex;
   justify-content: space-between;
   text-align: left;
+  gap: 200px;
 }
 
-#profile .flex .item{
+#profile .flex .item {
   display: flex;
   align-items: center;
 }
+#profile .flex .score {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
 
-#profile .flex img{
-max-width: 100px; /* Adjust the maximum width as needed */
-max-height: 100px; /* Adjust the maximum height as needed */
+#profile .flex img {
+max-width: 80px; /* Adjust the maximum width as needed */
+max-height: 80px; /* Adjust the maximum height as needed */
 border-radius: 50%;
 object-fit: cover; /* This ensures the image scales proportionally and covers the entire container */
 }
 
-#profile .flex .info{
- padding: 1em;
+#profile .flex .info {
+ padding: 1.2em;
+}
+#profile .flex .info h3 {
+font-size: 1.3rem;
 }
 
 .text-dark{
   color: var(--color-dark);
 }
 
+@media screen and (max-width: 767px) {
+  .flex {
+    padding: 15px
+  }
+  #profile .flex {
+    gap: 0;
+  }
+}
+
 /* Center-align the radio buttons */
-.radio-group-center {
+/* .radio-group-center {
 display: flex;
 justify-content: center;
 align-items: center;
-gap: 10px; /* Adjust the gap between radio buttons as needed */
-}
+gap: 10px;
+} */
 
 .flex {
 display: flex;
 justify-content: space-between; /* Adjust as needed */
 align-items: center; /* Adjust as needed */
-padding: 10px 10px 10px 10px; /* Adjust the padding to your preference */
-margin-bottom: 10px; /* Adjust the margin to your preference */
+padding: 30px; /* Adjust the padding to your preference */
+margin-bottom: 10px; 
+border-radius: 30px;/* Adjust the margin to your preference */
 }
 
 .even-entry {
-background-color: #8ef2ff; /* Background color for even entries */
+background-color: #fff; /* Background color for even entries */
 }
 
 .odd-entry {
-background-color: #ffffff; /* Background color for odd entries */
+background-color: #8ef2ff; /* Background color for odd entries */
 }

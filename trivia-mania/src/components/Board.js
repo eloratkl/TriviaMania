@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Profiles from './profiles'; // Import the Profiles component
 import { Leaderboard } from './database';
+import styles from "./Board.module.css"
 
 export default function Board({ period }) {
   const [filteredLeaderboard, setFilteredLeaderboard] = useState([]);
@@ -32,10 +33,9 @@ export default function Board({ period }) {
   }, [period]);
 
   return (
-    <div className="board">
-      <h1 className="leaderboard">Leaderboard</h1>
+    <div className={styles.board}>
 
-      <div className="duration">
+      <div className={styles.duration}>
         <Profiles Leaderboard={filteredLeaderboard} period={period} />
       </div>
     </div>

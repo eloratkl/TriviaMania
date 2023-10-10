@@ -1,0 +1,18 @@
+h1.leaderboard {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.radioGroup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+    /* Adjust the gap between radio buttons as needed */
+}
