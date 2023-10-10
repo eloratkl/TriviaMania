@@ -41,6 +41,7 @@ const Questions = () => {
   const [timerExpired, setTimerExpired] = useState(false);
   const [totalTimeUsed, setTotalTimeUsed] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
+  const [isTimerRunning, setIsTimerRunning] = useState(true);
   let seconds = 10;
 
   let apiUrl = `/api.php?amount=${amount_of_question}`;
@@ -63,6 +64,7 @@ const Questions = () => {
     if (showConfetti) {
       const timeout = setTimeout(() => {
         setShowNextQuestion(true);
+        handleResume();
         setShowConfetti(false);
       }, 2500); // Adjust the duration as needed (2500ms = 2.5 seconds)
       
@@ -88,9 +90,19 @@ const Questions = () => {
     setTimerExpired(true);
   };
 
+  const handlePause = () => {
+    setIsTimerRunning(false);
+  };
+
+  const handleResume = () => {
+    setIsTimerRunning(true);
+  };
+
   const updateTotalTimeUsed = (time) => {
+    if(isTimerRunning){
     setTotalTimeUsed((prevTime) => prevTime + time);
     dispatch(handleTotalTimeChange(totalTimeUsed));
+    }
   };
 
   const handleClickAnswer = (e) => {
@@ -100,6 +112,7 @@ const Questions = () => {
     if (selectedAnswer === question.correct_answer) {
       // Check if the selected answer is correct
       dispatch(handleScoreChange(score + 1));
+      handlePause();
       setShowConfetti(true);
       setShowNextQuestion(false);
     }
@@ -127,6 +140,7 @@ const Questions = () => {
 
   const handlePauseGame = () => {
     if (!isPaused) {
+      handlePause();
       dispatch(setGamePaused(true));
       setShowPopup(true);
       console.log("Dialog should be displayed now.");
@@ -135,6 +149,7 @@ const Questions = () => {
 
   const handleResumeGame = () => {
     if (showPopup) {
+      handleResume();
       dispatch(handleResumeGameAction());
       setShowPopup(false);
     }
@@ -174,30 +189,33 @@ const Questions = () => {
     return (
       <div className={styles.questionCard}>      
         {showConfetti && <Confetti />}
-        {showNextQuestion &&
-        <div className={styles.questionCard}>
-        <Button
-          onClick={handlePauseGame}
-          variant="contained"
-          color="primary"
-          className={styles.pauseButton}
-          startIcon={<PauseCircleOutlineIcon />}
-        >
-        </Button>
-        <div className={styles.questionIndex}>
-          Question: {questionIndex + 1}
-        </div>
-        <div className={styles.questionText}>
-          {decode(response.results[questionIndex].question)}
-        </div>
         <div className={styles.timerContainer}>
           {/* Pass initial time in seconds */}
           <CountdownTimer
             initialTime={amount_of_question * seconds}
             onTimerEnd={handleTimerEnd}
             updateTimeUsed={updateTotalTimeUsed}
+            isRunning={isTimerRunning}
           />
         </div>
+        {showNextQuestion &&
+        <div className={styles.questionCard}>
+        <Button
+          onClick={handlePauseGame} 
+          variant="contained"
+          color="primary"
+          className={styles.pauseButton}
+          startIcon={<PauseCircleOutlineIcon />}
+        >
+        </Button>
+        
+        <div className={styles.questionIndex}>
+          Question: {questionIndex + 1}
+        </div>
+        <div className={styles.questionText}>
+          {decode(response.results[questionIndex].question)}
+        </div>
+
         <div className={styles.answerOptions}>
           {options.map((data, id) => (
             <Button

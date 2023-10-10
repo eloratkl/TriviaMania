@@ -7,7 +7,7 @@ import {
   handleTotalTimeChange,
 } from "../redux/actions/quizActions";
 import styles from "./FinalScreen.module.css"; // Import the CSS module
-
+import congrats from '../assets/congrats.gif'
 
 const FinalScreen = () => {
   const dispatch = useDispatch();
@@ -33,6 +33,9 @@ const FinalScreen = () => {
 
   return (
     <div className={styles.finalScreenContainer}>
+      <div className={styles.header}>
+      {scorePercentage >= 75  && <img src={congrats} alt="success"/>}
+      </div>
       <div className={styles.header}>
         {scorePercentage >= 75 ? "Way to go!" : "Better Luck Next Time"}
       </div>
