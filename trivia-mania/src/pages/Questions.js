@@ -17,11 +17,12 @@ import {
   setGamePaused,
   handleResumeGameAction,
   handleQuitGameAction,
+  handleAmountChange,
 } from "../redux/actions/quizActions";
 import styles from "./Questions.module.css";
-import Card from "../components/structure/Card";
 import CountdownTimer from "../components/Timer";
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline"; // Import the PauseCircleOutline icon
+import Confetti from 'react-confetti';
 
 const Questions = () => {
   const {
@@ -35,6 +36,8 @@ const Questions = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [showNextQuestion, setShowNextQuestion] = useState(true);
+  const [showConfetti, setShowConfetti] = useState(false);
   const [timerExpired, setTimerExpired] = useState(false);
   const [totalTimeUsed, setTotalTimeUsed] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
@@ -57,13 +60,21 @@ const Questions = () => {
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
+    if (showConfetti) {
+      const timeout = setTimeout(() => {
+        setShowNextQuestion(true);
+        setShowConfetti(false);
+      }, 2500); // Adjust the duration as needed (2500ms = 2.5 seconds)
+      
+      return () => clearTimeout(timeout);
+    }
     if (response?.results.length) {
       const question = response.results[questionIndex];
       let answers = [question.correct_answer, ...question.incorrect_answers];
       answers = shuffleArray(answers); // Shuffle the answers randomly
       setOptions(answers);
     }
-  }, [response, questionIndex]);
+  }, [showConfetti, response, questionIndex]);
 
   if (loading) {
     return (
@@ -89,13 +100,16 @@ const Questions = () => {
     if (selectedAnswer === question.correct_answer) {
       // Check if the selected answer is correct
       dispatch(handleScoreChange(score + 1));
+      setShowConfetti(true);
+      setShowNextQuestion(false);
     }
-
+    if(showNextQuestion){
     if (questionIndex + 1 < response.results.length) {
       setQuestionIndex(questionIndex + 1);
     } else {
       navigate("/score");
     }
+  }
   };
 
   // Shuffle array function
@@ -133,37 +147,43 @@ const Questions = () => {
   };
 
   const handleBackToSettings = () => {
+    dispatch(handleScoreChange(0));
+    dispatch(handleAmountChange(50));
+    dispatch(handleTotalTimeChange(0));
     navigate("/settings"); // Use navigate to go back to the home route ("/")
   };
 
   const renderNoQuestions = () => {
     return (
-      <Card>
-        <div className={styles.questionContainer}>
-          <Typography variant="h5" fontWeight="bold" mb={3}>
-            Limited Questions only! {/* Display the final score */}
-          </Typography>
-          <button onClick={handleBackToSettings} className="buttonLight">
-            Back to settings!{" "}
-            {/* Display a button to navigate back to settings */}
-          </button>
-        </div>
-      </Card>
+      <div className={styles.questionContainer}>
+        <Typography variant="h5" fontWeight="bold" mb={3}>
+          Limited Questions only! {/* Display the final score */}
+        </Typography>
+        <Button onClick={handleBackToSettings} variant="outlined">
+          Back to settings! {/* Display a button to navigate back to settings */}
+        </Button>
+      </div>
     );
   };
 
   if (response?.results.length === 0) {
     return renderNoQuestions();
   } else {
+    if(!timerExpired)
+    {
     return (
-      <div className={styles.questionCard}>
+      <div className={styles.questionCard}>      
+        {showConfetti && <Confetti />}
+        {showNextQuestion &&
+        <div className={styles.questionCard}>
         <Button
           onClick={handlePauseGame}
           variant="contained"
           color="primary"
           className={styles.pauseButton}
           startIcon={<PauseCircleOutlineIcon />}
-        ></Button>
+        >
+        </Button>
         <div className={styles.questionIndex}>
           Question: {questionIndex + 1}
         </div>
@@ -194,19 +214,14 @@ const Questions = () => {
           Score: {score} / {amount_of_question}
         </div>
         {!timerExpired && (
-          <Button
-            onClick={handleBackToSettings}
-            variant="contained"
-            color="info"
-          >
+          <Button onClick={handleBackToSettings} variant="contained" color="info">
             Back to settings!
           </Button>
         )}
+        </div>}       
         <Dialog open={showPopup}>
           <DialogTitle>
-            <Typography variant="h6" align="center">
-              Game Paused
-            </Typography>
+            <Typography variant="h6" align="center">Game Paused</Typography>
           </DialogTitle>
           <DialogActions>
             <Button
@@ -223,6 +238,9 @@ const Questions = () => {
         </Dialog>
       </div>
     );
+  }else{
+    navigate("/score");
+  }
   }
 };
 export default Questions;
