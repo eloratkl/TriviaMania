@@ -131,6 +131,7 @@ function Homepage() {
         variant="contained"
         type="submit"
         className="homepage-button"
+        style={{cursor: "pointer"}}
       >
         <span
           style={{
