@@ -77,7 +77,7 @@ export const nav = [
     path: "/leaderboard",
     name: "Leaderboard",
     element: <Leaderboard />,
-    isMenu: false,
+    isMenu: true,
     isPrivate: true,
   },
 ];
