@@ -14,9 +14,11 @@ const Settings = () => {
 
   if (loading) {
     return (
-      <Box mt={20}>
+      
+      <div style={{textAlign: "center", width:"100%"}}>
         <CircularProgress />
-      </Box>
+      </div>
+    
     );
   }
 

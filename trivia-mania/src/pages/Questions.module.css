@@ -1,46 +1,121 @@
+
 /* Define CSS classes for styling */
+.questionContainer {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center; 
+
+}
+
 .questionCard {
   /* width: 1554px;
   height: 827px; */
-  width: auto;
-  height: auto; 
+  width: 100%;
+  height: 100%; 
   border-radius: 40px;
   background: #277BED;
-  padding: 32px;
+  padding: 4%;
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap; 
   align-items: center;
   justify-content: center;
   position: relative;
+  min-width: 500px;
+    margin: 0 5%;
+    max-width: 1080px;
 }
-.questionText {
-  margin-top: 1rem;
+
+
+.questionPauseRow {
   display: flex;
-  width: 1124px;
-  height: 74px;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.questionIndex h4 {
+  color: #fff;
+
+}
+
+.pauseButton {
+  background-color: transparent;
+  border: none;
+  width: 60px;
+  position: absolute;
+right: 2%;
+top: 4%;
+}
+
+
+.popupWrapper {
+  padding: 20px;
+}
+
+.questionText {
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  flex-shrink: 0;
   color: #FFF;
   text-align: center;
-  font-family: Poppins;
-  font-size: 36px;
-  font-style: normal;
+  font-size: 1.8rem;
   font-weight: 700;
-  line-height: normal;
-  margin-bottom: 30px;
+  margin: 20px 0;
 }
 
 .answerOptions {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+    display: flex;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+        
+}
+
+.answerOptions button {
+  width: 45%;
 }
 
 .answerButton {
-  width: 600px;
-  height: 100px;
+  /* width: 600px; */
+  padding: 20px;
+  min-height: 90px;
+  max-height: 100px;
   background: #FFF;
-  border-radius: 20px;
-  color: var(--black-text, #331646);
+  border-radius: 10px;
+  color: var(--black-text);
+  border: none;
+  font-weight: 700;
+  font-size: 1em;
+}
+
+.timerContainer {
+  margin-bottom: 30px;
+}
+
+.timerContainer p {
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+
+}
+
+
+@media screen and (max-width: 767px) {
+  .questionText {
+    font-size: 1.3em;
+  }
+  .questionCard {
+      max-width: 300px;
+        min-width: auto;
+        padding: 8%;
+        margin: 0;
+  }
+  .pauseButton {
+    width: 55px;
+  }
 }
