@@ -10,6 +10,8 @@ import styles from "./FinalScreen.module.css"; // Import the CSS module
 import { UpdatedLeaderBoard } from '../components/database';
 import congrats from '../assets/congrats.gif'
 
+import Card from '../components/structure/Card';
+
 
 const FinalScreen = () => {
   const dispatch = useDispatch();
@@ -37,16 +39,30 @@ const FinalScreen = () => {
   const scoreColor = scorePercentage >= 75 ? '#31cd63' : '#F24E1E';
 
   return (
-    <div className={styles.finalScreenContainer}>
+    <Card> 
+
+      {/* Header */}
+      <div className={styles.header}>
+        <h3>
+          {scorePercentage >= 75 ? "Way to go!" : "Better Luck Next Time!"}
+          </h3>
+      </div>
+
+      
+
+        {/* Gif */}
       <div className={styles.gifContainer}>
       {scorePercentage >= 75 && <img src={congrats} alt="Wishes"  className={styles.gifimage}/>}
       {scorePercentage < 75 && <img src="https://media.giphy.com/media/5uWKpbduvm99E5f82v/giphy.gif" alt="Wishes"  className={styles.gifimage}/>}
       </div>
-      <div className={styles.header}>
-        {scorePercentage >= 75 ? "Way to go!" : "Better Luck Next Time"}
-      </div>
-      <div className={styles.card}>
-        <div className={styles.cardHeader}>Your Score</div>
+
+
+
+      
+
+      {/* Score & Timing */}
+
+      <div className={styles.cardHeader}>Your Score</div>
         <div className={styles.score} style={{ color: scoreColor }}>
           {score} / {amount_of_question}
         </div>
@@ -54,15 +70,19 @@ const FinalScreen = () => {
           Total Time: {minutes.toString().padStart(2, '0')}:
           {seconds.toString().padStart(2, '0')} min
         </div>
-      </div>
+
       <button
         className="buttonLight"
         type="button"
         onClick={handleBackToSettings}
       >
         New Quiz
-      </button>
-    </div>
+        </button>
+
+
+    </Card>
+    
+
   );
 };
 

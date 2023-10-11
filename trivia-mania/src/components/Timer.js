@@ -26,9 +26,10 @@ const CountdownTimer = ({ initialTime, onTimerEnd, updateTimeUsed, isRunning }) 
   return (
     <>
     {isRunning && 
-    <div>
-      {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
-    </div>
+        <p>
+          Time Left:&nbsp;
+      {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')} min 
+    </p>
     }
     </>
   );

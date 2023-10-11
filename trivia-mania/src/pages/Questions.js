@@ -21,8 +21,9 @@ import {
 } from "../redux/actions/quizActions";
 import styles from "./Questions.module.css";
 import CountdownTimer from "../components/Timer";
-import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline"; // Import the PauseCircleOutline icon
 import Confetti from 'react-confetti';
+import Card from "../components/structure/Card";
+
 
 const Questions = () => {
   const {
@@ -80,7 +81,7 @@ const Questions = () => {
 
   if (loading) {
     return (
-      <div>
+      <div style={{textAlign: "center", width:"100%"}}>
         <CircularProgress />
       </div>
     );
@@ -170,16 +171,21 @@ const Questions = () => {
 
   const renderNoQuestions = () => {
     return (
-      <div className={styles.questionCard}>
-        <Typography variant="h5" fontWeight="bold" mb={3}>
-          Limited Questions only! {/* Display the final score */}
-        </Typography>
-        <Button onClick={handleBackToSettings} variant="contained" color="info">
+      <Card>
+        <h2 className="limitedQuestions">
+          Limited Questions only! 
+        </h2>
+        <button onClick={handleBackToSettings} className="buttonLight">
             Back to settings!
-        </Button>
-      </div>
+        </button>
+      </Card>
     );
   };
+
+
+
+
+
 
   if (response?.results.length === 0) {
     return renderNoQuestions();
@@ -187,56 +193,91 @@ const Questions = () => {
     if(!timerExpired)
     {
     return (
-      <div className={styles.questionCard}>      
+      <div className={styles.questionContainer}>      
+
+
         {showConfetti && <Confetti />}
-        <div className={styles.timerContainer}>
-          {/* Pass initial time in seconds */}
-          <CountdownTimer
-            initialTime={amount_of_question * seconds}
-            onTimerEnd={handleTimerEnd}
-            updateTimeUsed={updateTotalTimeUsed}
-            isRunning={isTimerRunning}
-          />
-        </div>
+       
+
+
+
         {showNextQuestion &&
-        <div className={styles.questionCard}>
-        <Button
-          onClick={handlePauseGame} 
-          variant="contained"
-          color="primary"
-          className={styles.pauseButton}
-          startIcon={<PauseCircleOutlineIcon />}
-        >
-        </Button>
+          <div className={styles.questionCard}>
+
+            <div className="questionPauseRow">
+
+              <div className={styles.questionIndex}>
+                <h4>Question {questionIndex + 1}</h4>
+               </div>
+            
+              <button className={ styles.pauseButton} onClick={handlePauseGame} >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1459B6" className="w-6 h-6">
+                  <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM9 8.25a.75.75 0 00-.75.75v6c0 .414.336.75.75.75h.75a.75.75 0 00.75-.75V9a.75.75 0 00-.75-.75H9zm5.25 0a.75.75 0 00-.75.75v6c0 .414.336.75.75.75H15a.75.75 0 00.75-.75V9a.75.75 0 00-.75-.75h-.75z" clipRule="evenodd" />
+                </svg>
+              </button>
         
-        <div className={styles.questionIndex}>
-          Question: {questionIndex + 1}
-        </div>
+
+            </div>
+            
+            
+
+
+
+        
+
         <div className={styles.questionText}>
           {decode(response.results[questionIndex].question)}
+            </div>
+            
+
+            {/* Timer */}
+            {/* Pass initial time in seconds */}
+            <div className={styles.timerContainer}>
+                  <CountdownTimer
+                    initialTime={amount_of_question * seconds}
+                    onTimerEnd={handleTimerEnd}
+                    updateTimeUsed={updateTotalTimeUsed}
+                    isRunning={isTimerRunning}
+                        />
         </div>
 
         <div className={styles.answerOptions}>
-          {options.map((data, id) => (
-            <Button
-              key={id}
-              onClick={handleClickAnswer}
-              variant="contained"
-              className={styles.answerButton}
-            >
-              {decode(data)}
-            </Button>
+              {options.map((data, id) => (
+            
+                <button key={id}
+                  onClick={handleClickAnswer}
+                  className={styles.answerButton}>
+                   
+                  {decode(data)}
+
+                </button>
+            // <Button
+            //   key={id}
+            //   onClick={handleClickAnswer}
+            //   variant="contained"
+            //   className={styles.answerButton}
+            // >
+            //   {decode(data)}
+            // </Button>
           ))}
-        </div>
-        <div className={styles.scoreText}>
+            </div>
+            
+
+
+        {/* <div className={styles.scoreText}>
           Score: {score} / {amount_of_question}
-        </div>
-        {!timerExpired && (
+        </div> */}
+            
+
+
+        {/* {!timerExpired && (
           <Button onClick={handleBackToSettings} variant="contained" color="info">
-            Back to settings!
+            Pick a New Quiz!
           </Button>
-        )}
-        </div>}       
+        )} */}
+          </div>}   
+        
+        {/*  Popup */}
         <Dialog open={showPopup}>
           <DialogTitle>
             <Typography variant="h6" align="center">Game Paused</Typography>

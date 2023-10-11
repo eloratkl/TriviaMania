@@ -82,6 +82,11 @@ h2 {
     padding-bottom: 20px;
 }
 
+h4 {
+  text-transform: uppercase; 
+  letter-spacing: 0.4em;
+}
+
 
 
 /* Buttons */
