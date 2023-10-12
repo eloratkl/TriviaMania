@@ -45,7 +45,7 @@ object-fit: cover; /* This ensures the image scales proportionally and covers th
  padding: 1.2em;
 }
 #profile .flex .info h3 {
-font-size: 1.3rem;
+margin-top: 0;
 }
 
 .text-dark{
