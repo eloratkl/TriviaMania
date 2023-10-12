@@ -43,13 +43,54 @@
   border: none;
   width: 60px;
   position: absolute;
-right: 2%;
-top: 4%;
+  right: 2%;
+  top: 4%;
 }
 
 
 .popupWrapper {
-  padding: 20px;
+  padding: 30px 20px;
+}
+
+.popupWrapper h3 {
+  text-align: center;
+}
+
+.popupClose {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.popupButtons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+}
+
+.popupButtons button {
+  padding: 15px 25px;
+    border-radius: 40px;
+    border: none;
+    height: auto;
+    min-width: 150px;
+    font-weight: 600;
+
+}
+
+.popupButtons button.buttonResume {
+  background-color: #25D065;
+  color: #fff;
 }
 
 .questionText {

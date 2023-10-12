@@ -279,21 +279,40 @@ const Questions = () => {
         
         {/*  Popup */}
         <Dialog open={showPopup}>
+          <div className={styles.popupWrapper}>
+            
+            <button onClick={handleResumeGame} className={styles.popupClose}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="#adadad"
+  className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+</svg>
+            </button>
+            
+
           <DialogTitle>
-            <Typography variant="h6" align="center">Game Paused</Typography>
+            <h3>Game Paused</h3>
           </DialogTitle>
           <DialogActions>
-            <Button
-              onClick={handleResumeGame}
-              variant="contained"
-              color="success"
-            >
-              Resume Game
-            </Button>
-            <Button onClick={handleQuitGame} variant="contained" color="error">
-              Quit Game
-            </Button>
-          </DialogActions>
+            <div className={ styles.popupButtons}>
+              <button className={ styles.buttonResume} onClick={handleResumeGame}>
+                Resume
+              </button>
+              <button className={ styles.buttonQuit} onClick={handleQuitGame}>
+                Quit Game
+              </button>
+              {/* <Button
+                onClick={handleResumeGame}
+                variant="contained"
+                color="success"
+              >
+                Resume Game
+              </Button> */}
+              {/* <Button onClick={handleQuitGame} variant="contained" color="error">
+                Quit Game
+              </Button> */}
+              </div>
+            </DialogActions>
+            </div>
         </Dialog>
       </div>
     );
