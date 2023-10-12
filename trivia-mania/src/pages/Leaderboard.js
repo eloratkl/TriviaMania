@@ -1,10 +1,4 @@
 import React, { useState } from "react";
-import {
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-} from "@mui/material";
-import Card from "../components/structure/Card";
 import Board from "../components/Board";
 import "../components/style.css";
 import styles from "./Leaderboard.module.css";
