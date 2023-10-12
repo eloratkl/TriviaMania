@@ -4,7 +4,7 @@ import { nav } from "./navigation";
 import logoLong from "../../assets/logoLong.png";
 import styles from "./RenderNavigation.module.css";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export const RenderRoutes = () => {
   const { user } = AuthData();
@@ -32,38 +32,64 @@ export const RenderMenu = () => {
 
   const MenuItem = ({ r }) => {
     return (
-      <li className={styles.menuItem}>
-        <Link to={r.path}>{r.name}</Link>
+      <li className={styles.menuItem} onClick={() => setNavIsExpanded(false)}>
+        <Link to={r.path} >{r.name}</Link>
       </li>
     );
   };
 
   const hasRegisterLink = nav.some((r) => r.path === "/register");
 
+
+  // handle onclick outside of menu > close menu
+
+  const ref = useRef();
+  useEffect(() => {
+    const handler = (event) => {
+      if (navIsExpanded &&
+        ref.current &&
+        !ref.current.contains(event.target)
+      ) {
+        setNavIsExpanded(false);
+      }
+
+    };
+    document.addEventListener('mousedown', handler);
+    return () => {
+      document.removeEventListener('mousedown', handler);
+    };
+  }, [navIsExpanded]);
+
+
   return (
-    <nav>
+    <nav ref={ ref }>
       {/* Mobile Burger Menu */}
       {/* icon from heroicons.com */}
       <button
         className={styles.hamburger}
         onClick={() => {
-          setNavIsExpanded(!navIsExpanded);
+          setNavIsExpanded((prev) => !prev);
         }}
       >
-        <svg
+        {navIsExpanded ? (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="#fff"
+              className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>)  : (<svg
           xmlns="http://www.w3.org/2000/svg"
           fill="white"
           viewBox="0 0 24 24"
           strokeWidth={2}
           stroke="white"
           className="w-6 h-6"
-        >
+             >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
           />
-        </svg>
+          </svg>)
+        }
+
       </button>
 
       <div
@@ -75,7 +101,7 @@ export const RenderMenu = () => {
         </Link>
       </div>
 
-      <ul className={navIsExpanded ? "" : styles.expanded}>
+      <ul className={navIsExpanded ? styles.expanded : ""}>
         <div className={styles.navbar_left}>
           {nav.map((r, i) => {
             if (
@@ -90,29 +116,29 @@ export const RenderMenu = () => {
           })}
         </div>
 
-        <div>
+        
           {user.isAuthenticated ? (
-            <li className={styles.menuItem}>
+            <li className={styles.menuItem} onClick={() => setNavIsExpanded(false)}>
               <Link to="/account">My Account</Link>
             </li>
           ) : (
             <div className={styles.navbar_right}>
-              <li className={styles.menuItem}>
+              <li className={styles.menuItem} onClick={() => setNavIsExpanded(false)}>
                 <Link to="/login">Login</Link>
               </li>
               <span>&nbsp;|&nbsp;</span>
-              <li className={styles.menuItem}>
+              <li className={styles.menuItem} onClick={() => setNavIsExpanded(false)}>
                 <Link to="/register">Sign Up</Link>
               </li>
             </div>
           )}
 
           {!user.isAuthenticated && !hasRegisterLink && (
-            <li className={styles.menuItem}>
+            <li className={styles.menuItem} onClick={() => setNavIsExpanded(false)}>
               <Link to="/register"> Register</Link>
             </li>
           )}
-        </div>
+        
       </ul>
     </nav>
   );

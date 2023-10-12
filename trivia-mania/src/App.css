@@ -102,6 +102,10 @@ p {
 
 
 /* Buttons */
+button {
+  cursor: pointer;
+}
+
 button.buttonLight,
 button.buttonDark,
 button.buttonMisc {
