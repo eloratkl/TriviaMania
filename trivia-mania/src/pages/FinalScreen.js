@@ -53,7 +53,7 @@ const FinalScreen = () => {
         {/* Gif */}
       <div className={styles.gifContainer}>
       {scorePercentage >= 75 && <img src={congrats} alt="Wishes"  className={styles.gifimage}/>}
-      {scorePercentage < 75 && <img src="https://media.giphy.com/media/5uWKpbduvm99E5f82v/giphy.gif" alt="Wishes"  className={styles.gifimage}/>}
+      {scorePercentage < 75 && <img src="https://media4.giphy.com/media/MNKo1E8MO85bfx6U2n/giphy.gif" alt="Wishes"  className={styles.gifimage}/>}
       </div>
 
 

@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 import {
-  handleScoreChange,
+  handleScoreChange, 
   handleTotalTimeChange,
   setGamePaused,
   handleResumeGameAction,
@@ -64,10 +64,10 @@ const Questions = () => {
   useEffect(() => {
     if (showConfetti) {
       const timeout = setTimeout(() => {
+        setShowConfetti(false);
         setShowNextQuestion(true);
         handleResume();
-        setShowConfetti(false);
-      }, 2500); // Adjust the duration as needed (2500ms = 2.5 seconds)
+      }, 1500); // Adjust the duration as needed (2500ms = 2.5 seconds)
       
       return () => clearTimeout(timeout);
     }
