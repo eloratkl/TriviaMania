@@ -20,7 +20,7 @@ const FinalScreen = () => {
 
   //Get player data
   UpdatedLeaderBoard(score);
-  
+
   // Calculate the score percentage
   const scorePercentage = (score / amount_of_question) * 100;
 
@@ -35,11 +35,18 @@ const FinalScreen = () => {
     navigate('/settings');
   };
 
+  const handleNewQuiz = () => {
+    dispatch(handleScoreChange(0));
+    dispatch(handleAmountChange(5)); // Adjust the number of questions as needed
+    navigate('/');
+  };
+
+
   // Conditionally set the color based on the score percentage
   const scoreColor = scorePercentage >= 75 ? '#31cd63' : '#F24E1E';
 
   return (
-    <Card> 
+    <Card>
 
       {/* Header */}
       <div className={styles.header}>
@@ -48,7 +55,7 @@ const FinalScreen = () => {
           </h3>
       </div>
 
-      
+
 
         {/* Gif */}
       <div className={styles.gifContainer}>
@@ -58,7 +65,7 @@ const FinalScreen = () => {
 
 
 
-      
+
 
       {/* Score & Timing */}
 
@@ -74,14 +81,14 @@ const FinalScreen = () => {
       <button
         className="buttonLight"
         type="button"
-        onClick={handleBackToSettings}
+        onClick={handleNewQuiz}
       >
         New Quiz
         </button>
 
 
     </Card>
-    
+
 
   );
 };

@@ -15,7 +15,7 @@ const initialState = {
   question_category: "", // Initialize the category with an empty string
   question_difficulty: "", // Initialize the difficulty with an empty string
   question_type: "", // Initialize the question type with an empty string
-  amount_of_question: 50, // Initialize the number of questions with 50
+  amount_of_question: 5, // Initialize the number of questions with 50
   score: 0, // Initialize the user's score with 0
   timeUsed: 0,
   isPaused: false, // Initialize the pause state with false
@@ -45,6 +45,7 @@ const quizReducer = (state = initialState, action) => {
       return {
         ...state,
         amount_of_question: action.payload,
+        score: 0,
       };
     case CHANGE_SCORE:
       return {

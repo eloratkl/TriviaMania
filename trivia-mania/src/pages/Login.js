@@ -23,7 +23,7 @@ export const Login = () => {
       const success = await handleLogin(formData.email, formData.password);
 
       if (success) {
-        navigate("/settings");
+        navigate("/account");
       } else {
         setError("Login failed. Please check your credentials.");
       }

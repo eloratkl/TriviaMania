@@ -55,6 +55,15 @@ export const setGamePaused = (isPaused) => {
   };
 };
 
+// Define an action creator for starting a new quiz
+export const handleStartNewQuiz = () => {
+  return (dispatch) => {
+    dispatch(handleScoreChange(0)); // Reset the score to 0
+    dispatch(handleAmountChange(5)); // Reset the number of questions (adjust as needed)
+    // Reset other relevant state properties if needed
+  };
+};
+
 // Define an action creator for resuming the game
 export const handleResumeGameAction = () => ({
   type: RESUME_GAME,
