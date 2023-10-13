@@ -1,5 +1,5 @@
 import mockUsers from '../data/mockUsers';
-
+import catprofile from "../assets/catprofile.jpg"
 export let Leaderboard = [
   {
     name: 'S Hanna',
@@ -60,7 +60,7 @@ export const UpdatedLeaderBoard = (score) => {
       name: mockUsers[0].name,
       location: 'Singapore',
       score: score,
-      img: 'https://cdn.aaihs.org/2017/08/v006q4ynkmbxcdfqo7fj-1024x576.jpg',
+      img: catprofile,
       dt: '2023-10-09',
     };
 

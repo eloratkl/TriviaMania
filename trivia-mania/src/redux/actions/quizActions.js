@@ -36,9 +36,9 @@ export const handleAmountChange = (payload) => ({
 });
 
 // Define an action creator for changing the user's score
-export const handleScoreChange = (payload) => ({
+export const handleScoreChange = (newScore) => ({
   type: CHANGE_SCORE, // Assign the action type constant for score change
-  payload, // Assign the new score value as the payload
+  payload: newScore, // Assign the new score value as the payload
 });
 
 // Define an action creator for changing the user's score

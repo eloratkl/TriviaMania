@@ -1,8 +1,8 @@
 const mockUsers = [
   {
     id: 1,
-    name: 'Jaett',
-    email: 'jaett@app.org',
+    name: 'Sarah',
+    email: 'sarah@app.org',
     password: 'react123',
     score: [],
   },

@@ -1,15 +1,27 @@
 import { FormControl, TextField } from "@mui/material"; // Import Material-UI components for form control and text field
 import { Box } from "@mui/system"; // Import Box component from Material-UI
-import React from "react"; // Import React from React library
+import React, {useEffect} from "react"; // Import React from React library
 import { useDispatch } from "react-redux"; // Import useDispatch hook from react-redux
 import { handleAmountChange } from "../redux/actions/quizActions"; // Import action creator for changing the amount of questions
 
-const TextFieldComp = () => {
+const TextFieldComp = (props) => {
   const dispatch = useDispatch(); // Initialize the useDispatch hook to dispatch actions
+  const { quizNoOfQuestionsValue } = props; 
+
+  useEffect(() => {
+  if (quizNoOfQuestionsValue !== undefined) {
+    handleChange();
+  }
+}, []);
 
   // Define a handleChange function that triggers when the text field value changes
   const handleChange = (e) => {
-    dispatch(handleAmountChange(e.target.value)); // Dispatch an action to change the amount of questions based on the entered value
+    if (quizNoOfQuestionsValue !== undefined) {
+      dispatch(handleAmountChange(quizNoOfQuestionsValue));
+      console.log("quizNoOfQuestionsValue: ", quizNoOfQuestionsValue);
+    } else {
+    dispatch(handleAmountChange(e.target.value));
+    }; // Dispatch an action to change the amount of questions based on the entered value
   };
 
   return (

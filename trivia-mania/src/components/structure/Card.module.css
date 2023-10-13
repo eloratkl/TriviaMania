@@ -1,12 +1,12 @@
 /* Card.module.css */
 .cardContainer {
-    background-color: transparent;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 50vh;
-    text-align: center;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  text-align: center;
 }
 
 .cardChild {
@@ -16,21 +16,20 @@
   filter: drop-shadow(0px 5px 8px rgba(1, 99, 232, 0.7));
   min-width: 500px;
   margin: 5%;
-margin-top: 0;
+  /* margin-top: 0; */
   max-width: 1080px;
 }
 
-
 @media screen and (max-width: 767px) {
-    .cardContainer {
-        margin: 20px;
-        margin-top:0;
-    }
+  .cardContainer {
+    margin: 20px;
+    /* margin-top:0; */
+  }
 
-    .cardContainer .cardChild {
-        padding: 30px;
-        min-width: 100px;
-        max-width: 300px;
-        margin: 0;
-    }
+  .cardContainer .cardChild {
+    padding: 30px;
+    min-width: 100px;
+    max-width: 300px;
+    /* margin: 0; */
+  }
 }

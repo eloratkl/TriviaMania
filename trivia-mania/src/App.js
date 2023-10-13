@@ -10,6 +10,7 @@ import Settings from "./pages/Settings";
 import Questions from "./pages/Questions";
 import FinalScreen from "./pages/FinalScreen";
 import Leaderboard from "./pages/Leaderboard";
+import QuizStart from "./pages/QuizStart";
 import { AuthWrapper, AuthData } from "./auth/AuthWrapper";
 import { Container, Typography } from "@mui/material";
 import { Box } from "@mui/system";
@@ -25,6 +26,7 @@ function App() {
           <Box textAlign={"center"} mt="5">
             <Routes>
               <Route path="/" element={<Homepage />} />
+              <PrivateRoute path="/quizstart" element={<QuizStart />} />
               <PrivateRoute path="/settings" component={<Settings />} />
               <PrivateRoute path="/questions" component={<Questions />} />
               <PrivateRoute path="/score" component={<FinalScreen />} />
