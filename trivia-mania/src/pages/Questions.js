@@ -201,9 +201,9 @@ const Questions = () => {
 
 
 
-        {showNextQuestion &&
+        
           <div className={styles.questionCard}>
-
+          {showNextQuestion &&
             <div className="questionPauseRow">
 
               <div className={styles.questionIndex}>
@@ -219,16 +219,17 @@ const Questions = () => {
 
             </div>
             
+          }
             
 
 
 
         
-
+            {showNextQuestion &&
         <div className={styles.questionText}>
           {decode(response.results[questionIndex].question)}
             </div>
-            
+           }
 
             {/* Timer */}
             {/* Pass initial time in seconds */}
@@ -240,7 +241,7 @@ const Questions = () => {
                     isRunning={isTimerRunning}
                         />
         </div>
-
+        {showNextQuestion &&
         <div className={styles.answerOptions}>
               {options.map((data, id) => (
             
@@ -261,7 +262,7 @@ const Questions = () => {
             // </Button>
           ))}
             </div>
-            
+          }  
 
 
         {/* <div className={styles.scoreText}>
@@ -275,7 +276,7 @@ const Questions = () => {
             Pick a New Quiz!
           </Button>
         )} */}
-          </div>}   
+          </div>   
         
         {/*  Popup */}
         <Dialog open={showPopup}>
