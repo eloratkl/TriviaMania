@@ -92,6 +92,7 @@ button.hamburger {
         display: flex;
         flex-flow: row wrap;
         align-items: center;
+        min-height: 50px;
     }
     button.hamburger {
         display: block;
