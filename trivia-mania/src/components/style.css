@@ -1,22 +1,22 @@
-:root{
+:root {
   --color-dark: #2C3131;
   --color-light: #F3F3F2;
 }
 
-#main{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+#main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 
-.active{
+.active {
   background-color: var(--color-dark);
   color: var(--color-light);
 }
 
-#profile .flex{
+#profile .flex {
   display: flex;
   justify-content: space-between;
   text-align: left;
@@ -27,6 +27,7 @@
   display: flex;
   align-items: center;
 }
+
 #profile .flex .score {
   display: flex;
   align-items: center;
@@ -35,20 +36,24 @@
 }
 
 #profile .flex img {
-max-width: 80px; /* Adjust the maximum width as needed */
-max-height: 80px; /* Adjust the maximum height as needed */
-border-radius: 50%;
-object-fit: cover; /* This ensures the image scales proportionally and covers the entire container */
+  max-width: 80px;
+  /* Adjust the maximum width as needed */
+  max-height: 80px;
+  /* Adjust the maximum height as needed */
+  border-radius: 50%;
+  object-fit: cover;
+  /* This ensures the image scales proportionally and covers the entire container */
 }
 
 #profile .flex .info {
- padding: 1.2em;
-}
-#profile .flex .info h3 {
-font-size: 1.3rem;
+  padding: 1.2em;
 }
 
-.text-dark{
+#profile .flex .info h3 {
+  font-size: 1.3rem;
+}
+
+.text-dark {
   color: var(--color-dark);
 }
 
@@ -56,6 +61,7 @@ font-size: 1.3rem;
   .flex {
     padding: 15px
   }
+
   #profile .flex {
     gap: 0;
   }
@@ -70,20 +76,26 @@ gap: 10px;
 } */
 
 .flex {
-display: flex;
-justify-content: space-between; /* Adjust as needed */
-align-items: center; /* Adjust as needed */
-padding: 30px; /* Adjust the padding to your preference */
-margin-bottom: 10px; 
-border-radius: 30px;/* Adjust the margin to your preference */
+  display: flex;
+  justify-content: space-between;
+  /* Adjust as needed */
+  align-items: center;
+  /* Adjust as needed */
+  padding: 30px;
+  /* Adjust the padding to your preference */
+  margin-bottom: 10px;
+  border-radius: 30px;
+  /* Adjust the margin to your preference */
 }
 
 .even-entry {
-background-color: #fff; /* Background color for even entries */
+  background-color: #fff;
+  /* Background color for even entries */
 }
 
 .odd-entry {
-background-color: #DFFBFF; /* Background color for odd entries */
+  background-color: #DFFBFF;
+  /* Background color for odd entries */
 }
 
 /* homepage css */
@@ -211,11 +223,9 @@ background-color: #DFFBFF; /* Background color for odd entries */
 }
 
 .quiz-start-button {
-  background: -webkit-linear-gradient(
-    0deg,
-    rgba(150, 68, 198, 1) 0%,
-    rgba(142, 242, 255, 1) 100%
-  );
+  background: -webkit-linear-gradient(0deg,
+      rgba(150, 68, 198, 1) 0%,
+      rgba(142, 242, 255, 1) 100%);
   color: #fff;
   font-weight: 600;
   text-transform: uppercase;
@@ -231,80 +241,82 @@ background-color: #DFFBFF; /* Background color for odd entries */
 }
 
 @media screen and (max-width: 767px) {
-.homepage-image-link {
-  width: 100%;
-}
+  .homepage-image-link {
+    width: 100%;
+  }
 
-.homepage-logo-link {
-  width: 50%;
-  max-width: 180px;
+  .homepage-logo-link {
+    width: 50%;
+    max-width: 180px;
 
-  margin-bottom: -2%;
-  margin-top: 0px;
-}
+    margin-bottom: -2%;
+    margin-top: 0px;
+  }
 
-.homepage-div {
-  margin: 7% 0;
-}
+  .homepage-div {
+    margin: 7% 0;
+  }
 
-/* start quiz */
-.quiz-start-title {
-  font-size: 2.6rem;
-  padding-bottom: 0px;
-  margin-top: -2%;
-}
+  /* start quiz */
+  .quiz-start-title {
+    font-size: 2.6rem;
+    padding-bottom: 0px;
+    margin-top: -2%;
+  }
 
-.quiz-tracker-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  .quiz-tracker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  margin: 0px auto 20px auto;
-}
+    margin: 0px auto 20px auto;
+  }
 
-.quiz-start-image {
-  width: 60%;
-}
+  .quiz-start-image {
+    width: 60%;
+  }
 
-.quiz-start-p {
-  hyphens: auto;
-}
+  .quiz-start-p {
+    hyphens: auto;
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1280px) {
-.homepage-image-link {
-  width: 32%;
+  .homepage-image-link {
+    width: 32%;
+  }
+
+  .homepage-logo-link {
+    width: 50%;
+    max-width: 180px;
+    margin-bottom: -2%;
+    margin-top: 0px;
+  }
+
+  .homepage-div {
+    margin: 11% 0;
+  }
+
+  /* start quiz */
+  .quiz-start-title {
+    font-size: 3.2rem;
+    padding-bottom: 0px;
+    margin-top: -2%;
+  }
+
+  .quiz-tracker-container {
+    max-width: 330px;
+
+    margin: 0px auto 20px auto;
+  }
+
+  .quiz-start-image {
+    width: 40%;
+  }
+
+  .quiz-start-p {
+    hyphens: auto;
+  }
 }
 
-.homepage-logo-link {
-  width: 50%;
-  max-width: 180px;
-  margin-bottom: -2%;
-  margin-top: 0px;
-}
-
-.homepage-div {
-  margin: 11% 0;
-}
-
-/* start quiz */
-.quiz-start-title {
-  font-size: 3.2rem;
-  padding-bottom: 0px;
-  margin-top: -2%;
-}
-
-.quiz-tracker-container {
-  max-width: 330px;
-
-  margin: 0px auto 20px auto;
-}
-
-.quiz-start-image {
-  width: 40%;
-}
-
-.quiz-start-p {
-  hyphens: auto;
-}
-};
+;
