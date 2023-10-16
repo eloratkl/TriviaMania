@@ -1,23 +1,19 @@
-
-/* Define CSS classes for styling */
 .questionContainer {
   display: flex;
   flex-flow: column wrap;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
 
 }
 
 .questionCard {
-  /* width: 1554px;
-  height: 827px; */
   width: 100%;
-  height: 100%; 
+  height: 100%;
   border-radius: 40px;
   background: #277BED;
   padding: 4%;
   display: flex;
-  flex-flow: column wrap; 
+  flex-flow: column wrap;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -114,7 +110,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-        
+
 }
 
 .answerOptions button {

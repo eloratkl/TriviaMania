@@ -8,10 +8,6 @@
   --black-text: #331646;
   --transition: all 0.3s ease-in-out;
   --background: #3189FF;
-
-  /* --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace; */
 }
 
 .App {
@@ -90,7 +86,7 @@ h3 {
 
 h4 {
   color: var(--black-text);
-  text-transform: uppercase; 
+  text-transform: uppercase;
   letter-spacing: 0.4em;
 }
 
@@ -172,6 +168,3 @@ button.buttonMisc {
 .buttonMisc:hover {
   box-shadow: none;
 }
-
-
-

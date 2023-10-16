@@ -1,7 +1,5 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { Container, Typography } from "@mui/material";
-// import { Box } from "@mui/system";
 import "../components/style.css";
 import Card from "../components/structure/Card";
 

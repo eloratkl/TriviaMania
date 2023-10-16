@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import {
-  // Button,
   CircularProgress,
   Dialog,
   DialogActions,
   DialogTitle,
-  // Typography,
 } from "@mui/material";
 import { decode } from "html-entities";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 import {
-  handleScoreChange, 
+  handleScoreChange,
   handleTotalTimeChange,
   setGamePaused,
   handleResumeGameAction,
@@ -21,9 +19,8 @@ import {
 } from "../redux/actions/quizActions";
 import styles from "./Questions.module.css";
 import CountdownTimer from "../components/Timer";
-import Confetti from 'react-confetti';
+import Confetti from "react-confetti";
 import Card from "../components/structure/Card";
-
 
 const Questions = () => {
   const {
@@ -68,7 +65,7 @@ const Questions = () => {
         setShowNextQuestion(true);
         handleResume();
       }, 1500); // Adjust the duration as needed (2500ms = 2.5 seconds)
-      
+
       return () => clearTimeout(timeout);
     }
     if (response?.results.length) {
@@ -81,7 +78,7 @@ const Questions = () => {
 
   if (loading) {
     return (
-      <div style={{textAlign: "center", width:"100%"}}>
+      <div style={{ textAlign: "center", width: "100%" }}>
         <CircularProgress />
       </div>
     );
@@ -100,9 +97,9 @@ const Questions = () => {
   };
 
   const updateTotalTimeUsed = (time) => {
-    if(isTimerRunning){
-    setTotalTimeUsed((prevTime) => prevTime + time);
-    dispatch(handleTotalTimeChange(totalTimeUsed));
+    if (isTimerRunning) {
+      setTotalTimeUsed((prevTime) => prevTime + time);
+      dispatch(handleTotalTimeChange(totalTimeUsed));
     }
   };
 
@@ -117,13 +114,13 @@ const Questions = () => {
       setShowConfetti(true);
       setShowNextQuestion(false);
     }
-    if(showNextQuestion){
-    if (questionIndex + 1 < response.results.length) {
-      setQuestionIndex(questionIndex + 1);
-    } else {
-      navigate("/score");
+    if (showNextQuestion) {
+      if (questionIndex + 1 < response.results.length) {
+        setQuestionIndex(questionIndex + 1);
+      } else {
+        navigate("/score");
+      }
     }
-  }
   };
 
   // Shuffle array function
@@ -172,154 +169,126 @@ const Questions = () => {
   const renderNoQuestions = () => {
     return (
       <Card>
-        <h2 className="limitedQuestions">
-          Limited Questions only! 
-        </h2>
+        <h2 className="limitedQuestions">Limited Questions only!</h2>
         <button onClick={handleBackToSettings} className="buttonLight">
-            Back to settings!
+          Back to settings!
         </button>
       </Card>
     );
   };
 
-
-
-
-
-
   if (response?.results.length === 0) {
     return renderNoQuestions();
   } else {
-    if(!timerExpired)
-    {
-    return (
-      <div className={styles.questionContainer}>      
+    if (!timerExpired) {
+      return (
+        <div className={styles.questionContainer}>
+          {showConfetti && <Confetti />}
 
-
-        {showConfetti && <Confetti />}
-       
-
-
-
-        
           <div className={styles.questionCard}>
-          {showNextQuestion &&
-            <div className="questionPauseRow">
+            {showNextQuestion && (
+              <div className="questionPauseRow">
+                <div className={styles.questionIndex}>
+                  <h4>Question {questionIndex + 1}</h4>
+                </div>
 
-              <div className={styles.questionIndex}>
-                <h4>Question {questionIndex + 1}</h4>
-               </div>
-            
-              <button className={ styles.pauseButton} onClick={handlePauseGame} >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1459B6" className="w-6 h-6">
-                  <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM9 8.25a.75.75 0 00-.75.75v6c0 .414.336.75.75.75h.75a.75.75 0 00.75-.75V9a.75.75 0 00-.75-.75H9zm5.25 0a.75.75 0 00-.75.75v6c0 .414.336.75.75.75H15a.75.75 0 00.75-.75V9a.75.75 0 00-.75-.75h-.75z" clipRule="evenodd" />
-                </svg>
-              </button>
-        
+                <button
+                  className={styles.pauseButton}
+                  onClick={handlePauseGame}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="#1459B6"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM9 8.25a.75.75 0 00-.75.75v6c0 .414.336.75.75.75h.75a.75.75 0 00.75-.75V9a.75.75 0 00-.75-.75H9zm5.25 0a.75.75 0 00-.75.75v6c0 .414.336.75.75.75H15a.75.75 0 00.75-.75V9a.75.75 0 00-.75-.75h-.75z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+            )}
 
-            </div>
-            
-          }
-            
-
-
-
-        
-            {showNextQuestion &&
-        <div className={styles.questionText}>
-          {decode(response.results[questionIndex].question)}
-            </div>
-           }
+            {showNextQuestion && (
+              <div className={styles.questionText}>
+                {decode(response.results[questionIndex].question)}
+              </div>
+            )}
 
             {/* Timer */}
             {/* Pass initial time in seconds */}
             <div className={styles.timerContainer}>
-                  <CountdownTimer
-                    initialTime={amount_of_question * seconds}
-                    onTimerEnd={handleTimerEnd}
-                    updateTimeUsed={updateTotalTimeUsed}
-                    isRunning={isTimerRunning}
-                        />
-        </div>
-        {showNextQuestion &&
-        <div className={styles.answerOptions}>
-              {options.map((data, id) => (
-            
-                <button key={id}
-                  onClick={handleClickAnswer}
-                  className={styles.answerButton}>
-                   
-                  {decode(data)}
-
-                </button>
-            // <Button
-            //   key={id}
-            //   onClick={handleClickAnswer}
-            //   variant="contained"
-            //   className={styles.answerButton}
-            // >
-            //   {decode(data)}
-            // </Button>
-          ))}
+              <CountdownTimer
+                initialTime={amount_of_question * seconds}
+                onTimerEnd={handleTimerEnd}
+                updateTimeUsed={updateTotalTimeUsed}
+                isRunning={isTimerRunning}
+              />
             </div>
-          }  
-
-
-        {/* <div className={styles.scoreText}>
-          Score: {score} / {amount_of_question}
-        </div> */}
-            
-
-
-        {/* {!timerExpired && (
-          <Button onClick={handleBackToSettings} variant="contained" color="info">
-            Pick a New Quiz!
-          </Button>
-        )} */}
-          </div>   
-        
-        {/*  Popup */}
-        <Dialog open={showPopup}>
-          <div className={styles.popupWrapper}>
-            
-            <button onClick={handleResumeGame} className={styles.popupClose}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="#adadad"
-  className="w-6 h-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-</svg>
-            </button>
-            
-
-          <DialogTitle>
-            <h3>Game Paused</h3>
-          </DialogTitle>
-          <DialogActions>
-            <div className={ styles.popupButtons}>
-              <button className={ styles.buttonResume} onClick={handleResumeGame}>
-                Resume
-              </button>
-              <button className={ styles.buttonQuit} onClick={handleQuitGame}>
-                Quit Game
-              </button>
-              {/* <Button
-                onClick={handleResumeGame}
-                variant="contained"
-                color="success"
-              >
-                Resume Game
-              </Button> */}
-              {/* <Button onClick={handleQuitGame} variant="contained" color="error">
-                Quit Game
-              </Button> */}
+            {showNextQuestion && (
+              <div className={styles.answerOptions}>
+                {options.map((data, id) => (
+                  <button
+                    key={id}
+                    onClick={handleClickAnswer}
+                    className={styles.answerButton}
+                  >
+                    {decode(data)}
+                  </button>
+                ))}
               </div>
-            </DialogActions>
+            )}
+          </div>
+
+          {/*  Popup */}
+          <Dialog open={showPopup}>
+            <div className={styles.popupWrapper}>
+              <button onClick={handleResumeGame} className={styles.popupClose}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="#adadad"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+
+              <DialogTitle>
+                <h3>Game Paused</h3>
+              </DialogTitle>
+              <DialogActions>
+                <div className={styles.popupButtons}>
+                  <button
+                    className={styles.buttonResume}
+                    onClick={handleResumeGame}
+                  >
+                    Resume
+                  </button>
+                  <button
+                    className={styles.buttonQuit}
+                    onClick={handleQuitGame}
+                  >
+                    Quit Game
+                  </button>
+                </div>
+              </DialogActions>
             </div>
-        </Dialog>
-      </div>
-    );
-  }else{
-    navigate("/score");
-  }
+          </Dialog>
+        </div>
+      );
+    } else {
+      navigate("/score");
+    }
   }
 };
 export default Questions;

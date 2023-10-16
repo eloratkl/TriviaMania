@@ -1,5 +1,4 @@
 import { CircularProgress, Typography } from "@mui/material";
-// import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import SelectField from "../components/SelectField";
 import TextFieldComp from "../components/TextFieldComp";
@@ -10,15 +9,13 @@ import Card from "../components/structure/Card";
 
 const Settings = () => {
   const { response, error, loading } = useAxios({ url: "/api_category.php" });
-  const navigate = useNavigate(); // Use useNavigate for navigation
+  const navigate = useNavigate();
 
   if (loading) {
     return (
-      
-      <div style={{textAlign: "center", width:"100%"}}>
+      <div style={{ textAlign: "center", width: "100%" }}>
         <CircularProgress />
       </div>
-    
     );
   }
 
@@ -43,7 +40,7 @@ const Settings = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/questions"); // Use navigate for navigation
+    navigate("/questions");
   };
 
   return (

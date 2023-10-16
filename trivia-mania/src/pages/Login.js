@@ -3,7 +3,6 @@ import React, { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthData } from "../auth/AuthWrapper";
 import styles from "./LoginSignUp.module.css";
-// import "../App.css";
 
 import Card from "../components/structure/Card";
 

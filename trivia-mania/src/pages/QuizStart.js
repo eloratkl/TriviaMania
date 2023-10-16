@@ -6,7 +6,6 @@ import "../components/style.css";
 import useAxios from "../hooks/useAxios";
 
 import { CircularProgress, Typography } from "@mui/material";
-// import { Box } from "@mui/system";
 import TextFieldComp from "../components/TextFieldComp";
 import SelectField from "../components/SelectField";
 
@@ -17,10 +16,11 @@ const QuizStart = () => {
     location.state?.startQuizParagraph || "Default Paragraph";
   const startQuizImage = location.state?.startQuizImage || "Default Image";
   const startQuizAlt = location.state?.startQuizAlt || "Default Image Alt";
-  let startQuizIndex = location.state?.startQuizIndex - 1 || "x";
+  let startQuizIndex = parseInt(location.state?.startQuizIndex, 10);
 
-  if (startQuizIndex === 2) {
-    startQuizIndex = 1;
+  if (isNaN(startQuizIndex) || startQuizIndex < 0) {
+    // Handle invalid or missing startQuizIndex here
+    startQuizIndex = 0; // Set a default value or handle it as needed
   }
 
   const { response, error, loading } = useAxios({ url: "/api_category.php" });

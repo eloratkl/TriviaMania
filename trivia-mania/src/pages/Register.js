@@ -1,5 +1,3 @@
-// Register.js
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../api/api"; // Import signup from your external module
