@@ -68,4 +68,8 @@ Open to collaboration, job opportunities, or any questions you may have. Feel fr
 Thank you for checking out Trivia Mania, and I hope you enjoy your trivia quiz adventure!
 
 ---
-
+![](trivia-mania/public/1.png) ![](trivia-mania/public/2.png) ![](trivia-mania/public/3.png) 
+![](trivia-mania/public/4.png) ![](trivia-mania/public/5.png) ![](trivia-mania/public/6.png) 
+![](trivia-mania/public/7.png) ![](trivia-mania/public/8.png) ![](trivia-mania/public/9.png)
+![](trivia-mania/public/10.png) ![](trivia-mania/public/11.png) ![](trivia-mania/public/12.png) 
+![](trivia-mania/public/13.png) ![](trivia-mania/public/14.png) ![](trivia-mania/public/15.png)  
