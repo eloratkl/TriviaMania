@@ -77,17 +77,27 @@ function Homepage() {
     },
   ];
 
-  // Hook to navigate to the selected random topic
   const navigate = useNavigate();
+
+  // State to hold the error message
+  const [errorMessage, setErrorMessage] = React.useState(null);
 
   // Function to handle the randomizer button click
   const handleRandomizerClick = () => {
-    // Select a random topic from the topics array
-    const randomIndex = Math.floor(Math.random() * topics.length);
-    const selectedTopic = topics[randomIndex];
-
-    // Navigate to the QuizStart page with the selected topic's state
-    navigate("/quizstart", { state: selectedTopic });
+    const isAuthenticated = localStorage.getItem("isAuthenticated");
+    console.log("isAuthenticated:", isAuthenticated);
+    
+    if (!isAuthenticated) {
+      // Set the error message
+      setErrorMessage("Please log in. If you don't have an account, sign up for one instead!");
+    } else {
+      // If the user is authenticated, clear the error message
+      setErrorMessage(null);
+      // Proceed with starting a random quiz
+      const randomIndex = Math.floor(Math.random() * topics.length);
+      const selectedTopic = topics[randomIndex];
+      navigate("/quizstart", { state: selectedTopic });
+    }
   };
 
   return (
@@ -101,201 +111,38 @@ function Homepage() {
       </Link>
 
       <Card className="cardContainerHome">
-        <h2
-          style={{ fontSize: "1.7rem", fontWeight: "bold", color: "#9644C6" }}
-        >
-          Pick a Topic to begin!
-        </h2>
+        {errorMessage ? ( // Render error message if it exists
+          <h3 style={{ color: "red" }}>{errorMessage}</h3>
+        ) : (
+          <h3
+            style={{ fontSize: "1.7rem", fontWeight: "bold", color: "#9644C6" }}
+          >
+            Pick a Topic to begin!
+          </h3>
+        )}
+
         <div className="homepage-topics-container">
-          <Link
-            to="/quizstart"
-            className="homepage-image-link"
-            state={{
-              title: topics[0].title,
-              startQuizParagraph: topics[0].startQuizParagraph,
-              startQuizImage: topics[0].startQuizImage,
-              startQuizAlt: topics[0].startQuizAlt,
-              startQuizIndex: "2", // 2 is for mitigating
-            }}
-          >
-            <div className="homepage-topics-title">Books</div>
-            <img
-              src="/images/books.jpg"
-              alt="books.jpg"
-              className="homepage-image"
-            />
-          </Link>
-
-          <Link
-            to="/quizstart"
-            className="homepage-image-link"
-            state={{
-              title: topics[1].title,
-              startQuizParagraph: topics[1].startQuizParagraph,
-              startQuizImage: topics[1].startQuizImage,
-              startQuizAlt: topics[1].startQuizAlt,
-              startQuizIndex: "12",
-            }}
-          >
-            <div className="homepage-topics-title">Mythology</div>
-            <img
-              src="/images/mythology.jpg"
-              alt="mythology.jpg"
-              className="homepage-image"
-            />
-          </Link>
-
-          <Link
-            to="/quizstart"
-            className="homepage-image-link"
-            state={{
-              title: topics[2].title,
-              startQuizParagraph: topics[2].startQuizParagraph,
-              startQuizImage: topics[2].startQuizImage,
-              startQuizAlt: topics[2].startQuizAlt,
-              startQuizIndex: "13",
-            }}
-          >
-            <div className="homepage-topics-title">Sports</div>
-            <img
-              src="/images/sports.jpg"
-              alt="sports.jpg"
-              className="homepage-image"
-            />
-          </Link>
-
-          <Link
-            to="/quizstart"
-            className="homepage-image-link"
-            state={{
-              title: topics[3].title,
-              startQuizParagraph: topics[3].startQuizParagraph,
-              startQuizImage: topics[3].startQuizImage,
-              startQuizAlt: topics[3].startQuizAlt,
-              startQuizIndex: "14",
-            }}
-          >
-            <div className="homepage-topics-title">Geography</div>
-            <img
-              src="/images/geography.jpg"
-              alt="geography.jpg"
-              className="homepage-image"
-            />
-          </Link>
-
-          <Link
-            to="/quizstart"
-            className="homepage-image-link"
-            state={{
-              title: topics[4].title,
-              startQuizParagraph: topics[4].startQuizParagraph,
-              startQuizImage: topics[4].startQuizImage,
-              startQuizAlt: topics[4].startQuizAlt,
-              startQuizIndex: "15",
-            }}
-          >
-            <div className="homepage-topics-title">History</div>
-            <img
-              src="/images/history.jpg"
-              alt="history.jpg"
-              className="homepage-image"
-            />
-          </Link>
-
-          <Link
-            to="/quizstart"
-            className="homepage-image-link"
-            state={{
-              title: topics[5].title,
-              startQuizParagraph: topics[5].startQuizParagraph,
-              startQuizImage: topics[5].startQuizImage,
-              startQuizAlt: topics[5].startQuizAlt,
-              startQuizIndex: "16",
-            }}
-          >
-            <div className="homepage-topics-title">Politics</div>
-            <img
-              src="/images/politics.jpg"
-              alt="politics.jpg"
-              className="homepage-image"
-            />
-          </Link>
-
-          <Link
-            to="/quizstart"
-            className="homepage-image-link"
-            state={{
-              title: topics[6].title,
-              startQuizParagraph: topics[6].startQuizParagraph,
-              startQuizImage: topics[6].startQuizImage,
-              startQuizAlt: topics[6].startQuizAlt,
-              startQuizIndex: "17",
-            }}
-          >
-            <div className="homepage-topics-title">Art</div>
-            <img
-              src="/images/art.jpg"
-              alt="art.jpg"
-              className="homepage-image"
-            />
-          </Link>
-
-          <Link
-            to="/quizstart"
-            className="homepage-image-link"
-            state={{
-              title: topics[7].title,
-              startQuizParagraph: topics[7].startQuizParagraph,
-              startQuizImage: topics[7].startQuizImage,
-              startQuizAlt: topics[7].startQuizAlt,
-              startQuizIndex: "18",
-            }}
-          >
-            <div className="homepage-topics-title">Celebrities</div>
-            <img
-              src="/images/celebrities.jpg"
-              alt="celebrities.jpg"
-              className="homepage-image"
-            />
-          </Link>
-
-          <Link
-            to="/quizstart"
-            className="homepage-image-link"
-            state={{
-              title: topics[8].title,
-              startQuizParagraph: topics[8].startQuizParagraph,
-              startQuizImage: topics[8].startQuizImage,
-              startQuizAlt: topics[8].startQuizAlt,
-              startQuizIndex: "19",
-            }}
-          >
-            <div className="homepage-topics-title">Animals</div>
-            <img
-              src="/images/animals.jpg"
-              alt="animals.jpg"
-              className="homepage-image"
-            />
-          </Link>
-
-          <Link
-            to="/quizstart"
-            className="homepage-image-link"
-            state={{
-              title: topics[9].title,
-              startQuizParagraph: topics[9].startQuizParagraph,
-              startQuizImage: topics[9].startQuizImage,
-              startQuizAlt: topics[9].startQuizAlt,
-              startQuizIndex: "20",
-            }}
-          >
-            <div className="homepage-topics-title">Vehicles</div>
-            <img
-              src="/images/vehicles.jpg"
-              alt="vehicles.jpg"
-              className="homepage-image"
-            />
-          </Link>
+          {topics.map((topic, index) => (
+            <Link
+              to="/quizstart"
+              className="homepage-image-link"
+              state={{
+                title: topic.title,
+                startQuizParagraph: topic.startQuizParagraph,
+                startQuizImage: topic.startQuizImage,
+                startQuizAlt: topic.startQuizAlt,
+                startQuizIndex: index,
+              }}
+              key={topic.title} // Adding a unique key for each Link
+            >
+              <div className="homepage-topics-title">{topic.title}</div>
+              <img
+                src={topic.startQuizImage}
+                alt={topic.startQuizAlt}
+                className="homepage-image"
+              />
+            </Link>
+          ))}
         </div>
       </Card>
 

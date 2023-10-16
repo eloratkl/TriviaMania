@@ -22,6 +22,7 @@ export const Login = () => {
       const success = await handleLogin(formData.email, formData.password);
 
       if (success) {
+        localStorage.setItem("isAuthenticated", "true");
         navigate("/account");
       } else {
         setError("Login failed. Please check your credentials.");

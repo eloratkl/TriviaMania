@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from 'react';
-// import { RenderHeader } from "../components/structure/Header";
 import {
   RenderMenu,
   RenderRoutes,
@@ -60,6 +59,7 @@ export const AuthWrapper = () => {
   };
 
   const logout = () => {
+    localStorage.removeItem("isAuthenticated");
     setUser({ name: '', isAuthenticated: false });
   };
 
@@ -75,7 +75,6 @@ export const AuthWrapper = () => {
       }}
     >
       <>
-        {/* <RenderHeader /> */}
         <RenderMenu />
         <RenderRoutes />
       </>
