@@ -82,20 +82,39 @@ function Homepage() {
   // State to hold the error message
   const [errorMessage, setErrorMessage] = React.useState(null);
 
+  // Function to check if the user is authenticated
+  const isAuthenticated = () => {
+    return localStorage.getItem("isAuthenticated");
+  };
+
   // Function to handle the randomizer button click
   const handleRandomizerClick = () => {
-    const isAuthenticated = localStorage.getItem("isAuthenticated");
-    console.log("isAuthenticated:", isAuthenticated);
-    
-    if (!isAuthenticated) {
+    if (!isAuthenticated()) {
       // Set the error message
-      setErrorMessage("Please log in. If you don't have an account, sign up for one instead!");
+      setErrorMessage(
+        "Please log in. If you don't have an account, sign up for one instead!"
+      );
     } else {
       // If the user is authenticated, clear the error message
       setErrorMessage(null);
       // Proceed with starting a random quiz
       const randomIndex = Math.floor(Math.random() * topics.length);
       const selectedTopic = topics[randomIndex];
+      navigate("/quizstart", { state: selectedTopic });
+    }
+  };
+
+  // Function to handle category image clicks
+  const handleCategoryImageClick = (selectedTopic) => {
+    if (!isAuthenticated()) {
+      // Set the error message
+      setErrorMessage(
+        "Please log in. If you don't have an account, sign up for one instead!"
+      );
+    } else {
+      // If the user is authenticated, clear the error message
+      setErrorMessage(null);
+      // Proceed with starting the selected category quiz
       navigate("/quizstart", { state: selectedTopic });
     }
   };
@@ -111,8 +130,8 @@ function Homepage() {
       </Link>
 
       <Card className="cardContainerHome">
-        {errorMessage ? ( // Render error message if it exists
-          <h3 style={{ color: "red" }}>{errorMessage}</h3>
+        {errorMessage ? (
+          <h3 style={{ fontSize: "1.7rem", fontWeight: "bold", color: "red" }}>{errorMessage}</h3>
         ) : (
           <h3
             style={{ fontSize: "1.7rem", fontWeight: "bold", color: "#9644C6" }}
@@ -123,17 +142,10 @@ function Homepage() {
 
         <div className="homepage-topics-container">
           {topics.map((topic, index) => (
-            <Link
-              to="/quizstart"
+            <div
               className="homepage-image-link"
-              state={{
-                title: topic.title,
-                startQuizParagraph: topic.startQuizParagraph,
-                startQuizImage: topic.startQuizImage,
-                startQuizAlt: topic.startQuizAlt,
-                startQuizIndex: index,
-              }}
-              key={topic.title} // Adding a unique key for each Link
+              onClick={() => handleCategoryImageClick(topic)} // Call the new function
+              key={topic.title}
             >
               <div className="homepage-topics-title">{topic.title}</div>
               <img
@@ -141,7 +153,7 @@ function Homepage() {
                 alt={topic.startQuizAlt}
                 className="homepage-image"
               />
-            </Link>
+            </div>
           ))}
         </div>
       </Card>
