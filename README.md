@@ -56,10 +56,20 @@ If you're interested in contributing to Trivia Mania or have suggestions for imp
 
 In the future, I plan to expand and improve Trivia Mania with the following features:
 
-- User authentication and profiles
-- Enhanced leaderboards
-- More quiz customization options
-- Additional game modes
+#### User Authentication and Profiles
+- Secure user authentication using bcrypt for password hashing.
+
+#### QR Code Game Activation
+- Implement QR code scanning to start quiz sessions.
+- Convenient and efficient game activation for users.
+- Seamless transition into quizzes using QR codes.
+
+#### Enhanced Leaderboards
+- Leaderboards for competitive quiz scores.
+- Showcasing top performers and their achievements.
+- Compete with friends and global players.
+
+#### Additional Game modes
 
 ## Contact
 
